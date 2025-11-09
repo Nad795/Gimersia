@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Collider2D playerCollider;
+    private Animator anim;
 
     private Vector2 moveInput;
     private float horizontalInput;
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
         HandleChecks();
         Flip();
-
+        HandleAnimations();
 
         // Coyote Time
         if (isGrounded)
@@ -178,6 +180,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleAnimations()
+    {
+        // We are "moving" if we have horizontal input AND we are on the ground.
+        bool isMoving = horizontalInput != 0 && isGrounded;
+        anim.SetBool("isMoving", isMoving);
+        
+        // This will be useful for Jump/Fall animations later
+        // anim.SetBool("isGrounded", isGrounded);
+        // anim.SetFloat("yVelocity", rb.velocity.y);
+    }
+
     private void Flip()
     {
         if (wallBounceLockoutTimeCounter <= 0f && horizontalInput != 0 && !justWallBounced)
@@ -186,7 +199,7 @@ public class PlayerController : MonoBehaviour
         }
         
         // Use localScale to flip the sprite (assumes sprite faces right by default)
-        transform.localScale = new Vector3(facingDirection, 1, 1);
+        transform.localScale = new Vector3(-facingDirection, 1, 1);
     }
 
     public void OnMove(InputValue value)
