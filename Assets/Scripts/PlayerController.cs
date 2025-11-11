@@ -1,18 +1,20 @@
 using System.Collections;
+using System.Dynamic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-
     private Rigidbody2D rb;
     private Collider2D playerCollider;
     private Animator anim;
+    private HealthSystem healthSystem;
 
     private Vector2 moveInput;
     private float horizontalInput;
-    
+
     private bool jumpPressed;
     private bool jumpHeld;
 
@@ -36,24 +38,23 @@ public class PlayerController : MonoBehaviour
     [Header("Wall Bounce")]
     [SerializeField] private Transform wallCheck;
     [SerializeField] private float wallCheckDistance = 0.7f;
-    // [SerializeField] private float wallSlideSpeed = 2f;
     [SerializeField] private Vector2 wallBounceForce = new Vector2(8f, 13f);
     [SerializeField] private float wallBounceLockoutTime = 0.3f;
     [SerializeField] private float wallBounceGraceTime = 0.1f;
-    // private bool isWallSliding;
+
     private float wallDirection => horizontalInput;
     private float wallBounceLockoutTimeCounter;
     private float wallBounceGraceTimeCounter;
 
-    [Header("Coyote Time")] 
+    [Header("Coyote Time")]
     [SerializeField] private float coyoteTime = 0.1f;
     private float coyoteTimeCounter;
 
-    [Header("Jump Buffer Time")] 
+    [Header("Jump Buffer Time")]
     [SerializeField] private float jumpBufferTime = 0.1f;
     private float jumpBufferTimeCounter;
 
-    [Header("Physics Materials")] 
+    [Header("Physics Materials")]
     [SerializeField] private PhysicsMaterial2D slippyMaterial;
     [SerializeField] private PhysicsMaterial2D stickyMaterial;
 
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        healthSystem = GetComponent<HealthSystem>();
     }
 
     private void Update()
@@ -74,52 +76,34 @@ public class PlayerController : MonoBehaviour
 
         // Coyote Time
         if (isGrounded)
-        {
             coyoteTimeCounter = coyoteTime;
-        }
         else
-        {
             coyoteTimeCounter -= Time.deltaTime;
-        }
-
 
         // Jump Buffering
         if (jumpPressed)
-        {
             jumpBufferTimeCounter = jumpBufferTime;
-        }
         else
-        {
             jumpBufferTimeCounter -= Time.deltaTime;
-        }
 
         // Wall Jump Lockout
         if (wallBounceLockoutTimeCounter > 0f)
-        {
             wallBounceLockoutTimeCounter -= Time.deltaTime;
-        }
 
-
-        // Wall Bounce Grace Time
+        // Wall Bounce Grace
         bool justTouchedWall = isTouchingWall && !wasTouchingWallLastFrame && !isGrounded;
         wasTouchingWallLastFrame = isTouchingWall;
 
         if (justTouchedWall)
-        {
             wallBounceGraceTimeCounter = wallBounceGraceTime;
-        }
         else
-        {
             wallBounceGraceTimeCounter -= Time.deltaTime;
-        }
     }
 
     private void FixedUpdate()
     {
         if (wallBounceLockoutTimeCounter <= 0f && !justWallBounced)
-        {
             rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
-        }
 
         bool canGroundJump = coyoteTimeCounter > 0f;
         bool tryBufferJump = jumpBufferTimeCounter > 0f;
@@ -136,7 +120,6 @@ public class PlayerController : MonoBehaviour
             justWallBounced = true;
             facingDirection *= -1f;
         }
-
         else if (jumpPressed && canGroundJump)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -144,7 +127,6 @@ public class PlayerController : MonoBehaviour
             jumpBufferTimeCounter = 0f;
             jumpPressed = false;
         }
-
         else if (tryBufferJump && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -153,11 +135,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (!jumpHeld && rb.linearVelocity.y > 0f)
-        {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * variableJumpMultiplier);
-        }
-
-        Debug.Log(isTouchingWall);
     }
 
     private void HandleChecks()
@@ -167,7 +145,6 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawRay(groundCheck.position, Vector2.down * groundCheckRadius, Color.green);
         Debug.DrawRay(wallCheck.position, new Vector2(facingDirection, 0) * wallCheckDistance, Color.red);
-
 
         if (isGrounded)
         {
@@ -182,29 +159,29 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAnimations()
     {
-        // We are "moving" if we have horizontal input AND we are on the ground.
+        // --- RUN ---
         bool isMoving = horizontalInput != 0 && isGrounded;
         anim.SetBool("isMoving", isMoving);
-        
-        // This will be useful for Jump/Fall animations later
-        // anim.SetBool("isGrounded", isGrounded);
-        // anim.SetFloat("yVelocity", rb.velocity.y);
+
+        // --- JUMP ---
+        bool isJumping = !isGrounded && !isTouchingWall;
+        anim.SetBool("isJumping", isJumping);
+
+        // --- WALL ATTACH ---
+        bool isWallAttach = isTouchingWall && !isGrounded && rb.linearVelocity.y <= 0f;
+        anim.SetBool("isWallAttach", isWallAttach);
     }
 
     private void Flip()
     {
         if (wallBounceLockoutTimeCounter <= 0f && horizontalInput != 0 && !justWallBounced)
-        {
             facingDirection = horizontalInput;
-        }
-        
-        // Use localScale to flip the sprite (assumes sprite faces right by default)
+
         transform.localScale = new Vector3(-facingDirection, 1, 1);
     }
 
     public void OnMove(InputValue value)
     {
-
         moveInput = value.Get<Vector2>();
     }
 
@@ -213,12 +190,22 @@ public class PlayerController : MonoBehaviour
         jumpHeld = value.isPressed;
 
         if (jumpHeld)
-        {
             jumpPressed = true;
-        }
         else
-        {
             jumpPressed = false;
-        }
+    }
+
+    public void Die()
+    {
+        anim.SetTrigger("Die");
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+    }
+
+    // Called by Animation Event at the end of Die animation
+    public void OnDeathAnimationEnd()
+    {
+        // Reload the current scene
+        healthSystem.ActivateGameOverPanel();
     }
 }
