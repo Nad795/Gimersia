@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5046820980657928875}
   - component: {fileID: 2412732255134496065}
   - component: {fileID: 2788366305586074623}
+  - component: {fileID: 3909841954408459657}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -239,7 +240,7 @@ Animator:
   m_GameObject: {fileID: 20514923705238695}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1423a0b20e1599b428cc2a416d464a20, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5616bd570b34d1045a76dfefd64d6b8b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -251,6 +252,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3909841954408459657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20514923705238695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1775292e56b174197188d6d71f2840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  playerController: {fileID: 2412732255134496065}
 --- !u!1 &2950848728720798040
 GameObject:
   m_ObjectHideFlags: 0
