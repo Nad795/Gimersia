@@ -8,15 +8,24 @@ public class HealthSystem : MonoBehaviour
 
     private void Awake()
     {
-        gameOver.SetActive(false);
+        if (gameOver != null)
+        {
+            gameOver.SetActive(false);
+        }
     }
     private void Start()
     {
-        gameOver.SetActive(false);
+        if (gameOver != null)
+        {
+            gameOver.SetActive(false);
+        }
     }
     private void OnEnable()
     {
-        gameOver.SetActive(false);
+        if (gameOver != null)
+        {
+            gameOver.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -35,6 +44,10 @@ public class HealthSystem : MonoBehaviour
 
     public void ActivateGameOverPanel()
     {
-        gameOver.SetActive(true);
+        if (gameOver != null)
+        {
+            Time.timeScale = 0;
+            gameOver.SetActive(true);
+        }
     }
 }

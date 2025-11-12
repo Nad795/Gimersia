@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 1c440f5180784d74f8a6def8da3303ef
   - enabled: 1
+    path: Assets/Scenes/PrologueCutscene.unity
+    guid: fceffa50031bebc4fbf40329c893189d
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: d9026d477c0d69d46adcc12521919fa8
   - enabled: 1
@@ -20,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level4.unity
     guid: e10a845b1ff78b04fbd28011e2012e8e
+  - enabled: 1
+    path: Assets/Scenes/EndingCutscene.unity
+    guid: 8710e4fdc6f303341bccb44de2fa7f4c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

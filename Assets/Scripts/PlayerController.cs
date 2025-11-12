@@ -3,6 +3,7 @@ using System.Dynamic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -119,26 +120,15 @@ public class PlayerController : MonoBehaviour
         // Dash Ghost Timer
         if (isDashing)
         {
-            // --- ADDED ---
-            // Handle ghost spawning timer
             if (ghostSpawnTimer > 0)
-            {
                 ghostSpawnTimer -= Time.deltaTime;
-            }
-
-            // We only want dash cooldown to tick down 
 
             return;
         }
-        
-        
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("facingDirection: " + facingDirection);
-        Debug.Log("horizontalInput: " + horizontalInput);
-
         if (wallBounceLockoutTimeCounter > 0f)
             return;
 
@@ -148,7 +138,6 @@ public class PlayerController : MonoBehaviour
         bool canGroundJump = coyoteTimeCounter > 0f;
         bool tryBufferJump = jumpBufferTimeCounter > 0f;
         // bool canWallBounce = wallBounceGraceTimeCounter > 0f;
-
 
         if (isDashing)
         {
@@ -164,7 +153,6 @@ public class PlayerController : MonoBehaviour
                 wallBounceLockoutTimeCounter = wallBounceLockoutTime;
                 coyoteTimeCounter = 0f;
                 jumpBufferTimeCounter = 0f;
-                // wallBounceGraceTimeCounter = 0f;
                 jumpPressed = false;
                 isDashing = false;
                 canDash = true;
@@ -172,7 +160,6 @@ public class PlayerController : MonoBehaviour
                 facingDirection *= -1f;
                 rb.gravityScale = originalGravityScale;
                 dashDurationCounter = 0f;
-                // dashCooldownCounter = 0.1f;
             }
 
             dashDurationCounter -= Time.deltaTime;
@@ -184,17 +171,6 @@ public class PlayerController : MonoBehaviour
             return; // Skip the rest of FixedUpdate while dashing
         }
 
-        // if (jumpPressed && canWallBounce)
-        // {
-        //     rb.linearVelocity = new Vector2(-facingDirection * wallBounceForce.x, wallBounceForce.y);
-        //     wallBounceLockoutTimeCounter = wallBounceLockoutTime;
-        //     coyoteTimeCounter = 0f;
-        //     jumpBufferTimeCounter = 0f;
-        //     wallBounceGraceTimeCounter = 0f;
-        //     jumpPressed = false;
-        //     justWallBounced = true;
-        //     facingDirection *= -1f;
-        // }
         else if (jumpPressed && canGroundJump)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -217,10 +193,6 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
         isTouchingWall = Physics2D.OverlapBox(wallCheck.position, wallCheckSize, 0f, groundLayer);
-        // isTouchingWall = Physics2D.Raycast(wallCheck.position, new Vector2(facingDirection, 0), wallCheckDistance, groundLayer);
-
-        // Debug.DrawRay(groundCheck.position, Vector2.down * groundCheckSize, Color.green);
-        // Debug.DrawRay(wallCheck.position, new Vector2(facingDirection, 0) * wallCheckDistance, Color.red);
 
         if (isGrounded)
         {
@@ -233,9 +205,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (isTouchingWall)
-        {
             justWallBounced = false;
-        }
     }
 
     private void HandleAnimations()
@@ -247,7 +217,6 @@ public class PlayerController : MonoBehaviour
         // --- JUMP ---
         bool isJumping = !isGrounded && !isTouchingWall;
         anim.SetBool("isJumping", isJumping);
-
 
         // --- WALL ATTACH ---
         bool isWallAttach = isTouchingWall && !isGrounded;
@@ -264,21 +233,26 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
+        // Ignore gameplay input while paused (prevents stick drift affecting state)
+        if (Time.timeScale == 0f) { moveInput = Vector2.zero; return; }
         moveInput = value.Get<Vector2>();
     }
 
     public void OnJump(InputValue value)
     {
-        jumpHeld = value.isPressed;
+        // Ignore *any* jump input if paused or pointer is over UI
+        if (Time.timeScale == 0f || IsPointerOverUI()) return;
 
-        if (jumpHeld)
-            jumpPressed = true;
-        else
-            jumpPressed = false;
+        jumpHeld = value.isPressed;
+        if (jumpHeld) jumpPressed = true;
+        else          jumpPressed = false;
     }
 
     public void OnDash(InputValue value)
     {
+        // Ignore dash when paused or clicking UI
+        if (Time.timeScale == 0f || IsPointerOverUI()) return;
+
         dashPressed = value.isPressed;
 
         if (dashPressed && canDash)
@@ -303,7 +277,6 @@ public class PlayerController : MonoBehaviour
     // Called by Animation Event at the end of Die animation
     public void OnDeathAnimationEnd()
     {
-        // Reload the current scene
         healthSystem.ActivateGameOverPanel();
     }
 
@@ -314,30 +287,39 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Ghost Prefab or Player Sprite is not assigned!");
             return;
         }
-        
-        // Create the ghost
-        GameObject ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
-        
-        // Match the flip
-        ghost.transform.localScale = transform.localScale;
-        
-        // Set the ghost's sprite to the player's *current* sprite
-        ghost.GetComponent<SpriteRenderer>().sprite = playerSprite.sprite;
-        
-        // (The GhostFade.cs script on the prefab will handle the rest)
-    }
 
+        GameObject ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
+        ghost.transform.localScale = transform.localScale;
+        ghost.GetComponent<SpriteRenderer>().sprite = playerSprite.sprite;
+    }
 
     private void OnDrawGizmos()
     {
         if (groundCheck == null) return;
 
-        // Draw the ground check box
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(groundCheck.position, groundCheckSize);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(wallCheck.position, wallCheckSize);
     }
 
-}
+    // ----- UI hit-test helper (mouse & touch) -----
+    private bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null) return false;
 
+        // Mouse / pen
+        if (EventSystem.current.IsPointerOverGameObject())
+            return true;
+
+        // Touch (primary)
+        if (Touchscreen.current != null)
+        {
+            int fingerId = Touchscreen.current.primaryTouch.touchId.ReadValue();
+            if (EventSystem.current.IsPointerOverGameObject(fingerId))
+                return true;
+        }
+
+        return false;
+    }
+}
