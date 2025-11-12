@@ -80,6 +80,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "9b01e8c5-3afd-4592-91d8-1c834249871c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "2ffb9a93-8363-4f7e-a7e1-c88d7cbed5a8",
                     "path": "2DVector",
