@@ -1714,8 +1714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fccc43697b57c34a9e1279bdc610a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RisingLava
-  startDelay: 2
-  riseSpeed: 0.5
+  startDelay: 2.5
+  riseSpeed: 0.75
 --- !u!50 &693911560
 Rigidbody2D:
   serializedVersion: 5

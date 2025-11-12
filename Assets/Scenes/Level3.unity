@@ -4747,7 +4747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RisingLava
   startDelay: 2
-  riseSpeed: 0.4
+  riseSpeed: 0.6
 --- !u!50 &1891270006
 Rigidbody2D:
   serializedVersion: 5
