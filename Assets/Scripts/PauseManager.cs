@@ -5,8 +5,13 @@ public class PauseManager : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private GameObject pauseMenu;
+
     [Header("Input System")]
-    [SerializeField] private PlayerInput playerInput; // drag the Player (with PlayerInput) here
+    [SerializeField] private PlayerInput playerInput;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource pauseSfxSource;
+    [SerializeField] private AudioClip pauseSfx;
 
     private bool isPaused;
     private InputAction pauseAction;
@@ -18,8 +23,6 @@ public class PauseManager : MonoBehaviour
 
         if (playerInput != null)
             pauseAction = playerInput.actions["Pause"];
-        else
-            Debug.LogError("PauseManager: PlayerInput not found.");
     }
 
     private void OnEnable()
@@ -42,7 +45,8 @@ public class PauseManager : MonoBehaviour
 
     private void Start()
     {
-        if (pauseMenu) pauseMenu.SetActive(false);
+        if (pauseMenu)
+            pauseMenu.SetActive(false);
     }
 
     private void OnPausePerformed(InputAction.CallbackContext ctx)
@@ -50,20 +54,32 @@ public class PauseManager : MonoBehaviour
         TogglePause();
     }
 
-    // === Public API (also hook UI buttons to these) ===
-    public void TogglePause() { if (isPaused) ResumeGame(); else PauseGame(); }
+    // === Public API ===
+    public void TogglePause()
+    {
+        // Play pause SFX regardless of pause/resume
+        if (pauseSfxSource != null && pauseSfx != null)
+            pauseSfxSource.PlayOneShot(pauseSfx);
+
+        if (isPaused)
+            ResumeGame();
+        else
+            PauseGame();
+    }
 
     public void PauseGame()
     {
         isPaused = true;
         Time.timeScale = 0f;
-        if (pauseMenu) pauseMenu.SetActive(true);
+        if (pauseMenu)
+            pauseMenu.SetActive(true);
     }
 
     public void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1f;
-        if (pauseMenu) pauseMenu.SetActive(false);
+        if (pauseMenu)
+            pauseMenu.SetActive(false);
     }
 }

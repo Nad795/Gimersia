@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8323657621257461489
 RectTransform:
   m_ObjectHideFlags: 0
@@ -89,12 +89,12 @@ GameObject:
   - component: {fileID: 5422653970534152689}
   - component: {fileID: 113877403162947304}
   m_Layer: 5
-  m_Name: RestartLevelBtn
+  m_Name: NextLevelBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4723777157879654599
 RectTransform:
   m_ObjectHideFlags: 0

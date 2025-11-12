@@ -8,6 +8,9 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip jumpSfx;
+
     private Rigidbody2D rb;
     private Collider2D playerCollider;
     private Animator anim;
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1f;
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
@@ -174,6 +178,10 @@ public class PlayerController : MonoBehaviour
         else if (jumpPressed && canGroundJump)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+            if (sfxSource != null || jumpSfx != null)
+                sfxSource.PlayOneShot(jumpSfx);
+
             coyoteTimeCounter = 0f;
             jumpBufferTimeCounter = 0f;
             jumpPressed = false;
@@ -181,6 +189,10 @@ public class PlayerController : MonoBehaviour
         else if (tryBufferJump && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+            if (sfxSource != null || jumpSfx != null)
+                sfxSource.PlayOneShot(jumpSfx);
+                
             jumpBufferTimeCounter = 0f;
             jumpPressed = false;
         }
@@ -284,7 +296,7 @@ public class PlayerController : MonoBehaviour
     {
         if (ghostPrefab == null || playerSprite == null)
         {
-            Debug.LogWarning("Ghost Prefab or Player Sprite is not assigned!");
+            // Debug.LogWarning("Ghost Prefab or Player Sprite is not assigned!");
             return;
         }
 
