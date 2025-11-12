@@ -35,10 +35,6 @@ public class SceneController : MonoBehaviour
         {
             SceneManager.LoadScene(nextIndex);
         }
-        else
-        {
-            Debug.Log("No next scene found — reached the end of build index list.");
-        }
     }
 
     public void LoadPreviousScene()
@@ -49,10 +45,6 @@ public class SceneController : MonoBehaviour
         {
             SceneManager.LoadScene(prevIndex);
         }
-        else
-        {
-            Debug.Log("No previous scene — this is the first one.");
-        }
     }
 
     public void LoadSceneByIndex(int index)
@@ -60,10 +52,6 @@ public class SceneController : MonoBehaviour
         if (index >= 0 && index < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(index);
-        }
-        else
-        {
-            Debug.LogError("Scene index out of range!");
         }
     }
 

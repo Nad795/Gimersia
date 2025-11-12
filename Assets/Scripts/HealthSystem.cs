@@ -1,22 +1,36 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class HealthSystem : MonoBehaviour
 {
     public PlayerController playerController;
     public GameObject gameOver;
 
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip loseSfx;
+
+    [SerializeField] private AudioSource levelBgmSource;
+
     private void Awake()
     {
-        gameOver.SetActive(false);
+        if (gameOver != null)
+        {
+            gameOver.SetActive(false);
+        }
     }
     private void Start()
     {
-        gameOver.SetActive(false);
+        if (gameOver != null)
+        {
+            gameOver.SetActive(false);
+        }
     }
     private void OnEnable()
     {
-        gameOver.SetActive(false);
+        if (gameOver != null)
+        {
+            gameOver.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -35,6 +49,35 @@ public class HealthSystem : MonoBehaviour
 
     public void ActivateGameOverPanel()
     {
-        gameOver.SetActive(true);
+        if (gameOver != null)
+        {
+            if (levelBgmSource != null)
+                StartCoroutine(FadeOutAudio(levelBgmSource, 1f));
+                
+            if (sfxSource != null && loseSfx != null)
+            {
+                sfxSource.PlayOneShot(loseSfx);
+            }
+            Time.timeScale = 0;
+            gameOver.SetActive(true);
+        }
+    }
+
+    private IEnumerator FadeOutAudio(AudioSource source, float duration = 1f)
+    {
+        if (source == null || !source.isPlaying) yield break;
+
+        float startVol = source.volume;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.unscaledDeltaTime / Mathf.Max(0.0001f, duration);
+            source.volume = Mathf.Lerp(startVol, 0f, t);
+            yield return null;
+        }
+
+        source.Stop();
+        source.volume = startVol; // reset for next use
     }
 }
