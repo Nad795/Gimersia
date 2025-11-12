@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 7143001438863905473}
   - component: {fileID: 6090012531966618127}
   - component: {fileID: 5046820980657928875}
-  - component: {fileID: 2412732255134496065}
   - component: {fileID: 2788366305586074623}
   - component: {fileID: 3909841954408459657}
+  - component: {fileID: 7711196908833297995}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Charge Jump Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,39 +201,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: 0
   m_Camera: {fileID: 0}
---- !u!114 &2412732255134496065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20514923705238695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fead92061c326d146a36d54f8e093e46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 8
-  jumpForce: 15
-  groundCheck: {fileID: 1737718930910769494}
-  groundCheckSize: {x: 0.8, y: 0.1}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  variableJumpMultiplier: 0.5
-  dashForce: 15
-  dashDuration: 0.1
-  dashCooldown: 0.5
-  wallCheck: {fileID: 2434425455819220643}
-  wallCheckSize: {x: 0.1, y: 1}
-  wallBounceForce: {x: 8, y: 13}
-  wallBounceLockoutTime: 0.3
-  coyoteTime: 0.1
-  jumpBufferTime: 0.1
-  ghostPrefab: {fileID: 4114723141842241931, guid: 3945ea653e2709b49b48a667b372d20b, type: 3}
-  ghostSpawnRate: 0.001
-  slippyMaterial: {fileID: 6200000, guid: 966cf12049d0ee641a0930df4c526af8, type: 2}
-  stickyMaterial: {fileID: 6200000, guid: e8aa466391e7fff43b37390844ecce00, type: 2}
 --- !u!95 &2788366305586074623
 Animator:
   serializedVersion: 7
@@ -268,8 +235,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1775292e56b174197188d6d71f2840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
-  playerController: {fileID: 2412732255134496065}
+  playerController: {fileID: 0}
   gameOver: {fileID: 0}
+--- !u!114 &7711196908833297995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20514923705238695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607f15a026dee2849b8eb43e2a8f1bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Charge_PlayerController
+  moveSpeed: 10
+  jumpForce: {x: 20, y: 30}
+  groundCheck: {fileID: 1737718930910769494}
+  groundCheckRadius: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  variableJumpMultiplier: 0.5
+  maxJumpHoldTime: 1
+  wallCheck: {fileID: 2434425455819220643}
+  wallCheckDistance: 0.7
+  wallBounceForce: {x: 8, y: 13}
+  wallBounceLockoutTime: 0.3
+  wallBounceGraceTime: 0.1
+  coyoteTime: 0.1
+  jumpBufferTime: 0.1
+  slippyMaterial: {fileID: 6200000, guid: 966cf12049d0ee641a0930df4c526af8, type: 2}
+  stickyMaterial: {fileID: 6200000, guid: e8aa466391e7fff43b37390844ecce00, type: 2}
 --- !u!1 &2950848728720798040
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +292,7 @@ Transform:
   m_GameObject: {fileID: 2950848728720798040}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
