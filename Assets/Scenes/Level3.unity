@@ -1828,6 +1828,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   pauseAfterAnimAndSfx: 0.15
   pauseAfterPanelSlide: 0.15
+  pauseButton: {fileID: 1980281198}
 --- !u!95 &771927354
 Animator:
   serializedVersion: 7

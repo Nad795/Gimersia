@@ -27,6 +27,7 @@ public class NextLevel : MonoBehaviour
     [SerializeField] private float pauseAfterPanelSlide = 0.15f;
 
     private bool triggered;
+    [SerializeField] private GameObject pauseButton;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -53,6 +54,8 @@ public class NextLevel : MonoBehaviour
 
     private IEnumerator PlayWinSequence(PlayerInput playerInput)
     {
+        pauseButton.SetActive(false);
+        
         // 1) Start animation + SFX simultaneously
         if (doorAnimator != null && !string.IsNullOrEmpty(winTrigger))
             doorAnimator.SetTrigger(winTrigger);

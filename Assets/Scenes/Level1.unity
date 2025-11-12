@@ -3571,6 +3571,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   pauseAfterAnimAndSfx: 0.15
   pauseAfterPanelSlide: 0.15
+  pauseButton: {fileID: 963907420}
 --- !u!61 &1187006909
 BoxCollider2D:
   m_ObjectHideFlags: 0
