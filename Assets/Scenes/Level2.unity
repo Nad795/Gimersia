@@ -3927,8 +3927,8 @@ MonoBehaviour:
   player: {fileID: 0}
   feetOffset: {x: 0, y: -0.8}
   groupWidth: 3
-  crackTime: 1
-  breakTime: 2
+  crackTime: 0.15
+  breakTime: 0.75
   normalLeft: {fileID: 11400000, guid: e1c0625306be90f40abfc6db8faa8262, type: 2}
   normalMid: {fileID: 11400000, guid: f9ac0e088f2d1ce4d9b9ca1cea9e50d9, type: 2}
   normalRight: {fileID: 11400000, guid: e4887a48130783b45b7941a7dd48cb49, type: 2}
