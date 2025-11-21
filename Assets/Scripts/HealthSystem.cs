@@ -5,6 +5,8 @@ public class HealthSystem : MonoBehaviour
 {
     public PlayerController playerController;
     public GameObject gameOver;
+    public int life = 3;
+    public int maxLife = 5;
 
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip loseSfx;
@@ -24,6 +26,8 @@ public class HealthSystem : MonoBehaviour
         {
             gameOver.SetActive(false);
         }
+
+        //instantiate heart
     }
     private void OnEnable()
     {
@@ -35,15 +39,30 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Lava"))
+        if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
         {
-            if (playerController != null)
-                playerController.Die();
+            life--;
 
-            // Stop the rising lava
-            RisingLava lava = FindObjectOfType<RisingLava>();
-            if (lava != null)
-                lava.StopLava();
+            if(life <= 0)
+            {
+                if (playerController != null)
+                {
+                    playerController.Die();
+                }
+
+                // Stop the rising lava
+                RisingLava lava = FindObjectOfType<RisingLava>();
+                if (lava != null)
+                {
+                    lava.StopLava();
+                }
+
+                MeteorSpawner meteor = FindObjectOfType<MeteorSpawner>();
+                if (meteor != null)
+                {
+                    meteor.StopSpawning();
+                }
+            }
         }
     }
 
