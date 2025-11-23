@@ -76,6 +76,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float ghostSpawnRate = 0.04f; // How often to spawn a ghost
     private float ghostSpawnTimer;
 
+    [Header("Stunning")]
+    // [SerializeField] private float stunDuration = 2f;
+    private bool isStunned;
+    private bool isDashStunned;
+    // private float stunTimer;
+
     [Header("Physics Materials")]
     [SerializeField] private PhysicsMaterial2D slippyMaterial;
     [SerializeField] private PhysicsMaterial2D stickyMaterial;
@@ -93,12 +99,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
         horizontalInput = moveInput.x;
 
         HandleChecks();
         Flip();
         HandleAnimations();
-
+        
         // Coyote Time
         if (isGrounded)
             coyoteTimeCounter = coyoteTime;
@@ -133,7 +140,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (wallBounceLockoutTimeCounter > 0f)
+        if (wallBounceLockoutTimeCounter > 0f || isStunned)
             return;
 
         if (!isDashing && !justWallBounced)
@@ -157,13 +164,10 @@ public class PlayerController : MonoBehaviour
                 wallBounceLockoutTimeCounter = wallBounceLockoutTime;
                 coyoteTimeCounter = 0f;
                 jumpBufferTimeCounter = 0f;
-                jumpPressed = false;
-                isDashing = false;
                 canDash = true;
-                justWallBounced = true;
                 facingDirection *= -1f;
-                rb.gravityScale = originalGravityScale;
-                dashDurationCounter = 0f;
+                justWallBounced = true;
+                CancelDash();
             }
 
             dashDurationCounter -= Time.deltaTime;
@@ -204,12 +208,21 @@ public class PlayerController : MonoBehaviour
     private void HandleChecks()
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
-        isTouchingWall = Physics2D.OverlapBox(wallCheck.position, wallCheckSize, 0f, groundLayer);
+        
+        if (!isStunned)
+        {
+            isTouchingWall = Physics2D.OverlapBox(wallCheck.position, wallCheckSize, 0f, groundLayer);
+        }
+        else
+        {
+            isTouchingWall = false;
+        }
 
         if (isGrounded)
         {
             playerCollider.sharedMaterial = stickyMaterial;
             justWallBounced = false;
+            isDashStunned = false;
         }
         else
         {
@@ -231,7 +244,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isJumping", isJumping);
 
         // --- WALL ATTACH ---
-        bool isWallAttach = isTouchingWall && !isGrounded;
+        bool isWallAttach = (isTouchingWall && !isGrounded) || isStunned;
         anim.SetBool("isWallAttach", isWallAttach);
     }
 
@@ -267,7 +280,7 @@ public class PlayerController : MonoBehaviour
 
         dashPressed = value.isPressed;
 
-        if (dashPressed && canDash)
+        if (dashPressed && canDash && !isDashStunned)
         {
             isDashing = true;
             canDash = false;
@@ -290,6 +303,41 @@ public class PlayerController : MonoBehaviour
     public void OnDeathAnimationEnd()
     {
         healthSystem.ActivateGameOverPanel();
+    }
+
+    public void ApplyStun(float stunDuration, Vector2 knockbackForce)
+    {
+        if (isStunned) return; // Prevent overlapping stuns
+
+        StartCoroutine(StunRoutine(stunDuration, knockbackForce));
+    }
+
+    private IEnumerator StunRoutine(float stunDuration, Vector2 knockbackForce)
+    {
+        CancelDash();
+    
+        isStunned = true;
+        isDashStunned = true;
+
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(knockbackForce, ForceMode2D.Impulse);
+
+        // Optionally, you can add visual feedback for being stunned here
+
+        yield return new WaitForSeconds(stunDuration);
+
+        isStunned = false;
+    }
+
+    private void CancelDash()
+    {
+        if (!isDashing) return;
+
+        isDashing = false;
+        dashPressed = false;
+        dashDurationCounter = 0f;
+        rb.gravityScale = originalGravityScale;
+        ghostSpawnTimer = 0f;
     }
 
     private void SpawnGhost()
