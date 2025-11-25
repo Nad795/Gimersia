@@ -40,34 +40,34 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
-    //     {
-    //         life--;
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
+        {
+            life--;
 
-    //         if(life <= 0)
-    //         {
-    //             if (playerController != null)
-    //             {
-    //                 playerController.Die();
-    //             }
+            if(life <= 0)
+            {
+                if (playerController != null)
+                {
+                    playerController.Die();
+                }
 
-    //             // Stop the rising lava
-    //             RisingLava lava = FindObjectOfType<RisingLava>();
-    //             if (lava != null)
-    //             {
-    //                 lava.StopLava();
-    //             }
+                // Stop the rising lava
+                RisingLava lava = FindAnyObjectByType<RisingLava>();
+                if (lava != null)
+                {
+                    lava.StopLava();
+                }
 
-    //             MeteorSpawner meteor = FindObjectOfType<MeteorSpawner>();
-    //             if (meteor != null)
-    //             {
-    //                 meteor.StopSpawning();
-    //             }
-    //         }
-    //     }
-    // }
+                MeteorSpawner meteor = FindAnyObjectByType<MeteorSpawner>();
+                if (meteor != null)
+                {
+                    meteor.StopSpawning();
+                }
+            }
+        }
+    }
 
     public void TakeDamage(int damage)
     {
@@ -93,13 +93,13 @@ public class HealthSystem : MonoBehaviour
             }
 
             // Stop the rising lava
-            RisingLava lava = FindObjectOfType<RisingLava>();
+            RisingLava lava = FindAnyObjectByType<RisingLava>();
             if (lava != null)
             {
                 lava.StopLava();
             }
 
-            MeteorSpawner meteor = FindObjectOfType<MeteorSpawner>();
+            MeteorSpawner meteor = FindAnyObjectByType<MeteorSpawner>();
             if (meteor != null)
             {
                 meteor.StopSpawning();
