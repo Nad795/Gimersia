@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5446168945963766389}
   - component: {fileID: 1313742672341865809}
   - component: {fileID: 1234467606078386516}
-  - component: {fileID: 5861169110361267332}
+  - component: {fileID: 2988449983937565388}
+  - component: {fileID: -3598931414603034484}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Meteor
@@ -216,7 +217,53 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &5861169110361267332
+--- !u!61 &2988449983937565388
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576496366468680269}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.21133333}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.28866667}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &-3598931414603034484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,11 +272,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 576496366468680269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed627dd2799e2b7459da7b5b2918688c, type: 3}
+  m_Script: {fileID: 11500000, guid: aaad72b0892834044a37455944493e49, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeteorSpawner
-  meteorPrefab: {fileID: 576496366468680269}
-  spawnInterval: 2
-  xMinPosition: -7
-  xMaxPosition: 7
-  yPosition: 60
+  m_EditorClassIdentifier: Assembly-CSharp::Meteor
+  destroyY: -10
+  damageAmount: 1
+  destroySelfOnHit: 1

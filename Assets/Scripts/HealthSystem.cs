@@ -7,6 +7,9 @@ public class HealthSystem : MonoBehaviour
     public GameObject gameOver;
     public int life = 3;
     public int maxLife = 5;
+    public int shieldAmount = 0;
+
+    [SerializeField] private GameObject shieldVisual;
 
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip loseSfx;
@@ -37,32 +40,80 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
+    //     {
+    //         life--;
+
+    //         if(life <= 0)
+    //         {
+    //             if (playerController != null)
+    //             {
+    //                 playerController.Die();
+    //             }
+
+    //             // Stop the rising lava
+    //             RisingLava lava = FindObjectOfType<RisingLava>();
+    //             if (lava != null)
+    //             {
+    //                 lava.StopLava();
+    //             }
+
+    //             MeteorSpawner meteor = FindObjectOfType<MeteorSpawner>();
+    //             if (meteor != null)
+    //             {
+    //                 meteor.StopSpawning();
+    //             }
+    //         }
+    //     }
+    // }
+
+    public void TakeDamage(int damage)
     {
-        if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
+        if (shieldAmount > 0)
         {
-            life--;
-
-            if(life <= 0)
+            shieldAmount--;
+            
+            if (shieldVisual != null)
             {
-                if (playerController != null)
-                {
-                    playerController.Die();
-                }
-
-                // Stop the rising lava
-                RisingLava lava = FindObjectOfType<RisingLava>();
-                if (lava != null)
-                {
-                    lava.StopLava();
-                }
-
-                MeteorSpawner meteor = FindObjectOfType<MeteorSpawner>();
-                if (meteor != null)
-                {
-                    meteor.StopSpawning();
-                }
+                shieldVisual.SetActive(shieldAmount > 0);
             }
+
+            return;
+        }
+
+        life -= damage;
+
+        if (life <= 0)
+        {
+            if (playerController != null)
+            {
+                playerController.Die();
+            }
+
+            // Stop the rising lava
+            RisingLava lava = FindObjectOfType<RisingLava>();
+            if (lava != null)
+            {
+                lava.StopLava();
+            }
+
+            MeteorSpawner meteor = FindObjectOfType<MeteorSpawner>();
+            if (meteor != null)
+            {
+                meteor.StopSpawning();
+            }
+        }
+    }
+
+    public void GainShield(int amount)
+    {
+        shieldAmount += amount;
+
+        if (shieldVisual != null)
+        {
+            shieldVisual.SetActive(shieldAmount > 0);
         }
     }
 
