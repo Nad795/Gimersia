@@ -556,7 +556,7 @@ MonoBehaviour:
   sfxSource: {fileID: 1675595941}
   crumbleSfx: {fileID: 8300000, guid: c6e721802ec4a7547aabfe96d8e6c4b3, type: 3}
   breakableTilemap: {fileID: 351980178}
-  sampleTilemap: {fileID: 2089174646}
+  sampleTilemap: {fileID: 351980178}
   player: {fileID: 1535112865}
   feetOffset: {x: 0, y: -1}
   extraFeetCheckOffsetX: 0.65
