@@ -9285,8 +9285,9 @@ MonoBehaviour:
   spawnInterval: 2
   xMin: -10
   xMax: 11
-  yMax: 0
-  maxMeteorCount: 10
+  yOffsetAbovePlayer: 20
+  maxMeteorCount: 6
+  player: {fileID: 1535112865}
 --- !u!114 &7672431392208523921
 MonoBehaviour:
   m_ObjectHideFlags: 0

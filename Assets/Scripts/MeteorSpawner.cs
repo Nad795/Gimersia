@@ -11,33 +11,52 @@ public class MeteorSpawner : MonoBehaviour
     public float spawnInterval = 2f;
     public float xMin = -7f;
     public float xMax = 7f;
-    public float yMax;
+    public float yOffsetAbovePlayer = 14f;   // seberapa jauh di atas player meteornya muncul
 
     public int maxMeteorCount = 10;
 
+    [Header("Player Ref")]
+    [SerializeField] private Transform player;
+
     private bool spawning = true;
+
+    // simpan ketinggian tertinggi yang pernah dicapai player
+    private float highestPlayerY;
 
     void Start()
     {
+        if (player == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null) player = p.transform;
+        }
+
+        if (player != null)
+            highestPlayerY = player.position.y;
+
         StartCoroutine(SpawnLoop());
     }
 
     void Update()
     {
-        yMax = Camera.main.transform.position.y + Camera.main.orthographicSize + 5f;
+        if (player == null) return;
+
+        // update ketinggian tertinggi
+        if (player.position.y > highestPlayerY)
+            highestPlayerY = player.position.y;
     }
 
     private IEnumerator SpawnLoop()
     {
         while (spawning)
         {
-                if (GameObject.FindGameObjectsWithTag("Meteor").Length < maxMeteorCount)
-                {
-                    SpawnMeteor();
-                }
+            if (GameObject.FindGameObjectsWithTag("Meteor").Length < maxMeteorCount)
+            {
+                SpawnMeteor();
+            }
 
-                float delay = Random.Range(0.5f, spawnInterval);
-                yield return new WaitForSeconds(delay);
+            float delay = Random.Range(0.5f, spawnInterval);
+            yield return new WaitForSeconds(delay);
         }
     }
 
@@ -45,11 +64,15 @@ public class MeteorSpawner : MonoBehaviour
     {
         float randomX = Random.Range(xMin, xMax);
 
-        float warningPos = Camera.main.transform.position.y + Camera.main.orthographicSize - 1f;
-        Vector2 warningPosition = new Vector2(randomX, warningPos);
+        float warningPosY = Camera.main.transform.position.y + Camera.main.orthographicSize - 1f;
+        Vector2 warningPosition = new Vector2(randomX, warningPosY);
 
         GameObject warning = Instantiate(warningPrefab, warningPosition, Quaternion.identity);
-        StartCoroutine(SpawnMeteorAfterWarning(randomX, warning, warningPos));
+
+        // meteor spawn di atas ketinggian tertinggi yang pernah dicapai player
+        float meteorSpawnY = highestPlayerY + yOffsetAbovePlayer;
+
+        StartCoroutine(SpawnMeteorAfterWarning(randomX, warning, meteorSpawnY));
     }
 
     public void StopSpawning()
@@ -57,14 +80,13 @@ public class MeteorSpawner : MonoBehaviour
         spawning = false;
     }
 
-    private IEnumerator SpawnMeteorAfterWarning(float xPos, GameObject warning, float warningY)
+    private IEnumerator SpawnMeteorAfterWarning(float xPos, GameObject warning, float meteorY)
     {
         yield return new WaitForSeconds(warningDuration);
 
-        Vector2 meteorPosition = new Vector2(xPos, yMax);
+        Vector2 meteorPosition = new Vector2(xPos, meteorY);
         Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
 
         Destroy(warning);
     }
-
 }
