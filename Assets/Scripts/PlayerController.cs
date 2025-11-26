@@ -158,18 +158,6 @@ public class PlayerController : MonoBehaviour
                 ghostSpawnTimer = ghostSpawnRate;
             }
 
-            if (isTouchingWall && !isGrounded)
-            {
-                rb.linearVelocity = new Vector2(-facingDirection * wallBounceForce.x, wallBounceForce.y);
-                wallBounceLockoutTimeCounter = wallBounceLockoutTime;
-                coyoteTimeCounter = 0f;
-                jumpBufferTimeCounter = 0f;
-                canDash = true;
-                facingDirection *= -1f;
-                justWallBounced = true;
-                CancelDash();
-            }
-
             dashDurationCounter -= Time.deltaTime;
             if (dashDurationCounter <= 0f)
             {
@@ -179,6 +167,22 @@ public class PlayerController : MonoBehaviour
             return; // Skip the rest of FixedUpdate while dashing
         }
 
+        // Wall Jump - requires jump input while touching wall and not grounded
+        if (jumpPressed && isTouchingWall && !isGrounded)
+        {
+            rb.linearVelocity = new Vector2(-facingDirection * wallBounceForce.x, wallBounceForce.y);
+            wallBounceLockoutTimeCounter = wallBounceLockoutTime;
+            coyoteTimeCounter = 0f;
+            jumpBufferTimeCounter = 0f;
+            canDash = true;
+            facingDirection *= -1f;
+            justWallBounced = true;
+            jumpPressed = false;
+
+            if (sfxSource != null && jumpSfx != null)
+                sfxSource.PlayOneShot(jumpSfx);
+        }
+        // Ground Jump
         else if (jumpPressed && canGroundJump)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);

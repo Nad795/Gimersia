@@ -88,6 +88,8 @@ public class Ghosthand : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("Ghosthand hit player");
+
             PlayerController player = collision.GetComponent<PlayerController>();
             if (player != null)
             {

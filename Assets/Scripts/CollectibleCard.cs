@@ -25,14 +25,23 @@ public class CollectibleCard : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Card collected by player");
+            
+            
+
             HealthSystem health = other.GetComponent<HealthSystem>();
             
             if (health != null)
             {
                 health.GainShield(shieldAmount);
 
+                if (LevelCardTracker.Instance != null)
+                {
+                    LevelCardTracker.Instance.ReportCardCollected();
+                }
+
                 if (destroySelfOnHit)
                 {
+                    GetComponent<Collider2D>().enabled = false; 
                     Destroy(gameObject);
                 }
             }

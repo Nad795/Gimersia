@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1602084551614708449}
+  - component: {fileID: 3909841954408459657}
   - component: {fileID: 1170016031325432701}
   - component: {fileID: 7143001438863905473}
   - component: {fileID: 6090012531966618127}
   - component: {fileID: 5046820980657928875}
   - component: {fileID: 2412732255134496065}
   - component: {fileID: 2788366305586074623}
-  - component: {fileID: 3909841954408459657}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -41,6 +41,29 @@ Transform:
   - {fileID: 2218940200061897903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3909841954408459657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20514923705238695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1775292e56b174197188d6d71f2840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  playerController: {fileID: 2412732255134496065}
+  gameOver: {fileID: 0}
+  life: 1
+  maxLife: 1
+  shieldAmount: 0
+  shieldVisual: {fileID: 6477692159374635684}
+  sfxSource: {fileID: 0}
+  loseSfx: {fileID: 0}
+  levelBgmSource: {fileID: 0}
+  invulnerabilityDuration: 1
+  blinkInterval: 0.1
 --- !u!212 &1170016031325432701
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -85,8 +108,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -266691385
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bb310ee1d2724014b99639796405e255, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -259,27 +282,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3909841954408459657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20514923705238695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1775292e56b174197188d6d71f2840, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
-  playerController: {fileID: 2412732255134496065}
-  gameOver: {fileID: 0}
-  life: 1
-  maxLife: 1
-  shieldAmount: 0
-  shieldVisual: {fileID: 6477692159374635684}
-  sfxSource: {fileID: 0}
-  loseSfx: {fileID: 0}
-  levelBgmSource: {fileID: 0}
 --- !u!1 &2950848728720798040
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5231989779641550972, guid: 9e79937da71f5454aac8377641c512bf, type: 3}
       propertyPath: m_SortingLayer
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5231989779641550972, guid: 9e79937da71f5454aac8377641c512bf, type: 3}
       propertyPath: m_SortingLayerID

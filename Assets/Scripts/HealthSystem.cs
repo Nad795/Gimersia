@@ -3,6 +3,8 @@ using System.Collections;
 
 public class HealthSystem : MonoBehaviour
 {
+    private SpriteRenderer playerSprite;
+
     public PlayerController playerController;
     public GameObject gameOver;
     public int life = 3;
@@ -16,12 +18,19 @@ public class HealthSystem : MonoBehaviour
 
     [SerializeField] private AudioSource levelBgmSource;
 
+    [Header("Invulnerability")]
+    [SerializeField] private float invulnerabilityDuration = 1f;
+    [SerializeField] private float blinkInterval = 0.1f;
+    private bool isInvulnerable = false;
+
     private void Awake()
     {
         if (gameOver != null)
         {
             gameOver.SetActive(false);
         }
+
+        playerSprite = GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
@@ -40,39 +49,49 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
-        {
-            life--;
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
+    //     {
+    //         life--;
 
-            if(life <= 0)
-            {
-                if (playerController != null)
-                {
-                    playerController.Die();
-                }
+    //         if(life <= 0)
+    //         {
+    //             if (playerController != null)
+    //             {
+    //                 playerController.Die();
+    //             }
 
-                // Stop the rising lava
-                RisingLava lava = FindAnyObjectByType<RisingLava>();
-                if (lava != null)
-                {
-                    lava.StopLava();
-                }
+    //             // Stop the rising lava
+    //             RisingLava lava = FindAnyObjectByType<RisingLava>();
+    //             if (lava != null)
+    //             {
+    //                 lava.StopLava();
+    //             }
 
-                MeteorSpawner meteor = FindAnyObjectByType<MeteorSpawner>();
-                if (meteor != null)
-                {
-                    meteor.StopSpawning();
-                }
-            }
-        }
-    }
+    //             MeteorSpawner meteor = FindAnyObjectByType<MeteorSpawner>();
+    //             if (meteor != null)
+    //             {
+    //                 meteor.StopSpawning();
+    //             }
+    //         }
+    //     }
+    // }
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("About to take " + damage + " damage");
+
+        if (isInvulnerable)
+        {
+            Debug.Log("Currently invulnerable, no damage taken");
+            return;
+        }
+
         if (shieldAmount > 0)
         {
+            Debug.Log("Shield absorbed damage");
+
             shieldAmount--;
             
             if (shieldVisual != null)
@@ -80,13 +99,17 @@ public class HealthSystem : MonoBehaviour
                 shieldVisual.SetActive(shieldAmount > 0);
             }
 
+            StartCoroutine(InvulnerabilityCoroutine());
+
             return;
         }
 
         life -= damage;
+        Debug.Log("Took " + damage + " damage, life is now " + life);
 
         if (life <= 0)
         {
+            Debug.Log("Life has reached zero or below");
             if (playerController != null)
             {
                 playerController.Die();
@@ -105,6 +128,8 @@ public class HealthSystem : MonoBehaviour
                 meteor.StopSpawning();
             }
         }
+
+        StartCoroutine(InvulnerabilityCoroutine());
     }
 
     public void GainShield(int amount)
@@ -131,6 +156,30 @@ public class HealthSystem : MonoBehaviour
             Time.timeScale = 0;
             gameOver.SetActive(true);
         }
+    }
+
+    private IEnumerator InvulnerabilityCoroutine()
+    {
+        isInvulnerable = true;
+        float elapsed = 0f;
+
+        while (elapsed < invulnerabilityDuration)
+        {
+            if (playerSprite != null)
+            {
+                playerSprite.enabled = !playerSprite.enabled;
+            }
+            
+            yield return new WaitForSeconds(blinkInterval);
+            elapsed += blinkInterval;
+        }
+
+        if (playerSprite != null)
+        {
+            playerSprite.enabled = true;
+        }
+        
+        isInvulnerable = false;
     }
 
     private IEnumerator FadeOutAudio(AudioSource source, float duration = 1f)

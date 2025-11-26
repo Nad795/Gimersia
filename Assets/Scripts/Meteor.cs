@@ -30,6 +30,7 @@ public class Meteor : MonoBehaviour
 
                 if (destroySelfOnHit)
                 {
+                    GetComponent<Collider2D>().enabled = false; 
                     Destroy(gameObject);
                 }
             }

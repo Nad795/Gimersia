@@ -22,12 +22,42 @@ public class NextLevel : MonoBehaviour
     [SerializeField] private float endX = 0f;
     [SerializeField] private AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
+    [Header("Virtue Art")]
+    [SerializeField] private RectTransform virtueArtPanel;
+    [SerializeField] private GameObject virtueArtButton;
+    private bool artDismissed = false;
+
     [Header("Beat Pauses (seconds, unscaled)")]
     [SerializeField] private float pauseAfterAnimAndSfx = 0.15f;
     [SerializeField] private float pauseAfterPanelSlide = 0.15f;
 
     private bool triggered;
     [SerializeField] private GameObject pauseButton;
+
+
+    private void Start()
+    {
+        if (nextLevelButton != null)
+            nextLevelButton.SetActive(false);
+
+        if (virtueArtPanel != null)
+            virtueArtPanel.gameObject.SetActive(false);
+
+        if (victoryPanel != null)
+            victoryPanel.gameObject.SetActive(false);
+
+        if (virtueArtButton != null)
+        {
+            virtueArtButton.SetActive(false);
+            virtueArtButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(DismissVirtueArt);
+        }
+    }
+
+
+    public void DismissVirtueArt()
+    {
+        artDismissed = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -49,55 +79,73 @@ public class NextLevel : MonoBehaviour
         if (playerInput != null)
             playerInput.enabled = false;
 
-        StartCoroutine(PlayWinSequence(playerInput));
+        bool collectedAllCards = LevelCardTracker.Instance != null && LevelCardTracker.Instance.HasCollectedAllCards();
+
+        StartCoroutine(PlayWinSequence(collectedAllCards));
     }
 
-    private IEnumerator PlayWinSequence(PlayerInput playerInput)
+    private IEnumerator PlayWinSequence(bool showSpecialArt)
     {
-        pauseButton.SetActive(false);
-        
-        // 1) Start animation + SFX simultaneously
+        if (pauseButton != null) pauseButton.SetActive(false);
+
         if (doorAnimator != null && !string.IsNullOrEmpty(winTrigger))
             doorAnimator.SetTrigger(winTrigger);
 
         if (winSfxSource != null && winSfx != null)
             winSfxSource.PlayOneShot(winSfx);
 
-        yield return null; // give animator one frame to update
+        yield return null;
 
-        // 2) Wait for both door animation and SFX to finish
         float animLen = GetCurrentOrNextClipLength(doorAnimator);
         float sfxLen = (winSfx != null ? winSfx.length : 0f) / (winSfxSource != null ? Mathf.Max(0.0001f, winSfxSource.pitch) : 1f);
         float waitLen = Mathf.Max(animLen, sfxLen);
 
         yield return new WaitForSecondsRealtime(waitLen + pauseAfterAnimAndSfx);
 
-        // 3) Slide in the victory panel
-        if (victoryPanel != null)
+
+        if (showSpecialArt && virtueArtPanel != null)
         {
-            victoryPanel.gameObject.SetActive(true);
-            Vector2 pos = victoryPanel.anchoredPosition;
-            pos.x = startOffsetX;
-            victoryPanel.anchoredPosition = pos;
+            if (virtueArtButton != null)
+                virtueArtButton.SetActive(true);
+            yield return StartCoroutine(SlidePanelIn(virtueArtPanel));
 
-            float t = 0f;
-            while (t < 1f)
-            {
-                t += Time.unscaledDeltaTime / Mathf.Max(0.0001f, slideDuration);
-                float k = easeCurve.Evaluate(Mathf.Clamp01(t));
-                pos.x = Mathf.Lerp(startOffsetX, endX, k);
-                victoryPanel.anchoredPosition = pos;
-                yield return null;
-            }
+            yield return new WaitUntil(() => artDismissed);
 
-            victoryPanel.anchoredPosition = new Vector2(endX, victoryPanel.anchoredPosition.y);
+            virtueArtButton.SetActive(false);
+
+            // virtueArtPanel.gameObject.SetActive(false);
         }
 
-        // 4) Small pause before showing the button
+        if (victoryPanel != null)
+        {
+            yield return StartCoroutine(SlidePanelIn(victoryPanel));
+        }
+
         yield return new WaitForSecondsRealtime(pauseAfterPanelSlide);
 
+        // 4. Show the Scene Loader Button
         if (nextLevelButton != null)
             nextLevelButton.SetActive(true);
+
+    }
+
+    private IEnumerator SlidePanelIn(RectTransform panel)
+    {
+        panel.gameObject.SetActive(true);
+        Vector2 pos = panel.anchoredPosition;
+        pos.x = startOffsetX;
+        panel.anchoredPosition = pos;
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.unscaledDeltaTime / Mathf.Max(0.0001f, slideDuration);
+            float k = easeCurve.Evaluate(Mathf.Clamp01(t));
+            pos.x = Mathf.Lerp(startOffsetX, endX, k);
+            panel.anchoredPosition = pos;
+            yield return null;
+        }
+        panel.anchoredPosition = new Vector2(endX, panel.anchoredPosition.y);
     }
 
     // Helper to get length of current/next animation clip
