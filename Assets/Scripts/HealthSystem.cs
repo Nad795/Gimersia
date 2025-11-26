@@ -51,10 +51,12 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
+        if (other.CompareTag("Lava"))
         {
-            // life--;
-            TakeDamage(1);
+            life--;
+
+            if (other.CompareTag("Meteor"))
+                TakeDamage(1);
 
             if(life <= 0)
             {
