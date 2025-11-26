@@ -86,6 +86,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PhysicsMaterial2D slippyMaterial;
     [SerializeField] private PhysicsMaterial2D stickyMaterial;
 
+    [Header("Run Smoke VFX")]
+    [SerializeField] private ParticleSystem runSmokeVFX;
+
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -243,6 +246,8 @@ public class PlayerController : MonoBehaviour
         bool isMoving = horizontalInput != 0 && isGrounded;
         anim.SetBool("isMoving", isMoving);
 
+        HandleRunSmokeVFX(isMoving);
+
         // --- JUMP ---
         bool isJumping = !isGrounded && !isTouchingWall;
         anim.SetBool("isJumping", isJumping);
@@ -251,6 +256,28 @@ public class PlayerController : MonoBehaviour
         bool isWallAttach = (isTouchingWall && !isGrounded) || isStunned;
         anim.SetBool("isWallAttach", isWallAttach);
     }
+
+    private void HandleRunSmokeVFX(bool isMoving)
+    {
+        if (runSmokeVFX == null) return;
+
+        bool shouldPlay =
+            isMoving &&
+            !isDashing &&
+            !isStunned;
+
+        if (shouldPlay)
+        {
+            if (!runSmokeVFX.isPlaying)
+                runSmokeVFX.Play();
+        }
+        else
+        {
+            if (!runSmokeVFX.isStopped)
+                runSmokeVFX.Stop();
+        }
+    }
+
 
     private void Flip()
     {
