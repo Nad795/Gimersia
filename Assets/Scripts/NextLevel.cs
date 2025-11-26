@@ -33,6 +33,7 @@ public class NextLevel : MonoBehaviour
 
     private bool triggered;
     [SerializeField] private GameObject pauseButton;
+    private bool levelSaved = false;
 
 
     private void Start()
@@ -86,6 +87,13 @@ public class NextLevel : MonoBehaviour
 
     private IEnumerator PlayWinSequence(bool showSpecialArt)
     {
+        if (!levelSaved)
+        {
+            GameManager.Instance.data.level++;
+            GameManager.Instance.SaveGame();
+            levelSaved = true;
+        }
+
         if (pauseButton != null) pauseButton.SetActive(false);
 
         if (doorAnimator != null && !string.IsNullOrEmpty(winTrigger))
@@ -126,8 +134,22 @@ public class NextLevel : MonoBehaviour
         // 4. Show the Scene Loader Button
         if (nextLevelButton != null)
             nextLevelButton.SetActive(true);
-
+        
+        CommitCollectiblesOnWin();
     }
+
+    public void CommitCollectiblesOnWin()
+    {
+        foreach (var id in GameManager.Instance.data.tempCollect)
+        {
+            if (!GameManager.Instance.data.collectible.Contains(id))
+                GameManager.Instance.data.collectible.Add(id);
+        }
+
+        GameManager.Instance.data.tempCollect.Clear();
+        GameManager.Instance.SaveGame();
+    }
+
 
     private IEnumerator SlidePanelIn(RectTransform panel)
     {

@@ -109,6 +109,7 @@ public class HealthSystem : MonoBehaviour
 
         if (life <= 0)
         {
+
             Debug.Log("Life has reached zero or below");
             if (playerController != null)
             {
@@ -144,6 +145,8 @@ public class HealthSystem : MonoBehaviour
 
     public void ActivateGameOverPanel()
     {
+        DiscardTempCollectibles();
+        
         if (gameOver != null)
         {
             if (levelBgmSource != null)
@@ -199,4 +202,11 @@ public class HealthSystem : MonoBehaviour
         source.Stop();
         source.volume = startVol; // reset for next use
     }
+
+    public void DiscardTempCollectibles()
+    {
+        GameManager.Instance.data.tempCollect.Clear();
+        GameManager.Instance.SaveGame();
+    }
+
 }
