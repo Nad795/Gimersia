@@ -2317,8 +2317,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   virtueArtPanel: {fileID: 0}
   virtueArtButton: {fileID: 0}
+  virtueFadeDuration: 0.5
   pauseAfterAnimAndSfx: 0.15
   pauseAfterPanelSlide: 0.15
+  unlockLevelValue: 5
+  maxLevel: 9
   pauseButton: {fileID: 963907420}
 --- !u!61 &1187006909
 BoxCollider2D:
@@ -3108,6 +3111,71 @@ Transform:
   - {fileID: 955753008}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2060786425
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.35669
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.7428
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179762048254625512, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919570378391727075, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: totalCards
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919570378391727075, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: counterText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171631456697534960, guid: f827d72796616f641873ade059831a42, type: 3}
+      propertyPath: m_Name
+      value: Level Card Tracker
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f827d72796616f641873ade059831a42, type: 3}
 --- !u!1 &2089174643
 GameObject:
   m_ObjectHideFlags: 0
@@ -11047,3 +11115,4 @@ SceneRoots:
   - {fileID: 1368923683}
   - {fileID: 1187006906}
   - {fileID: 737822821}
+  - {fileID: 2060786425}

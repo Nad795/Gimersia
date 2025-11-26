@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class NextLevel : MonoBehaviour
 {
@@ -25,16 +26,22 @@ public class NextLevel : MonoBehaviour
     [Header("Virtue Art")]
     [SerializeField] private RectTransform virtueArtPanel;
     [SerializeField] private GameObject virtueArtButton;
+    [SerializeField] private float virtueFadeDuration = 0.5f;
     private bool artDismissed = false;
 
     [Header("Beat Pauses (seconds, unscaled)")]
     [SerializeField] private float pauseAfterAnimAndSfx = 0.15f;
     [SerializeField] private float pauseAfterPanelSlide = 0.15f;
 
+    [Header("Level Progression")]
+    [Tooltip("Nilai level tertinggi yang akan di-unlock ketika level ini selesai. Contoh: Level1 = 2, Level2 = 3, ..., Level9 = 9.")]
+    [SerializeField] private int unlockLevelValue = 1;
+    [Tooltip("Jumlah level maksimum yang ada di game (saat ini 9).")]
+    [SerializeField] private int maxLevel = 9;
+
     private bool triggered;
     [SerializeField] private GameObject pauseButton;
     private bool levelSaved = false;
-
 
     private void Start()
     {
@@ -42,7 +49,15 @@ public class NextLevel : MonoBehaviour
             nextLevelButton.SetActive(false);
 
         if (virtueArtPanel != null)
+        {
             virtueArtPanel.gameObject.SetActive(false);
+
+            var cg = virtueArtPanel.GetComponent<CanvasGroup>();
+            if (cg != null)
+            {
+                cg.alpha = 0f;
+            }
+        }
 
         if (victoryPanel != null)
             victoryPanel.gameObject.SetActive(false);
@@ -53,7 +68,6 @@ public class NextLevel : MonoBehaviour
             virtueArtButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(DismissVirtueArt);
         }
     }
-
 
     public void DismissVirtueArt()
     {
@@ -80,17 +94,24 @@ public class NextLevel : MonoBehaviour
         if (playerInput != null)
             playerInput.enabled = false;
 
-        bool collectedAllCards = LevelCardTracker.Instance != null && LevelCardTracker.Instance.HasCollectedAllCards();
+        bool collectedAllCards = LevelCardTracker.Instance != null &&
+                                 LevelCardTracker.Instance.HasCollectedAllCards();
 
         StartCoroutine(PlayWinSequence(collectedAllCards));
     }
 
     private IEnumerator PlayWinSequence(bool showSpecialArt)
     {
-        if (!levelSaved)
+        var gm = GameManager.Instance;
+
+        // ==== PERBAIKAN SAVE LEVEL DI SINI ====
+        if (!levelSaved && gm != null && gm.data != null)
         {
-            GameManager.Instance.data.level++;
-            GameManager.Instance.SaveGame();
+            int clampedUnlock = Mathf.Clamp(unlockLevelValue, 1, maxLevel);
+
+            // Hanya naik kalau unlockLevelValue lebih tinggi dari level yang sudah pernah dicapai
+            gm.data.level = Mathf.Max(gm.data.level, clampedUnlock);
+            gm.SaveGame();
             levelSaved = true;
         }
 
@@ -105,25 +126,26 @@ public class NextLevel : MonoBehaviour
         yield return null;
 
         float animLen = GetCurrentOrNextClipLength(doorAnimator);
-        float sfxLen = (winSfx != null ? winSfx.length : 0f) / (winSfxSource != null ? Mathf.Max(0.0001f, winSfxSource.pitch) : 1f);
+        float sfxLen = (winSfx != null ? winSfx.length : 0f) /
+                       (winSfxSource != null ? Mathf.Max(0.0001f, winSfxSource.pitch) : 1f);
         float waitLen = Mathf.Max(animLen, sfxLen);
 
         yield return new WaitForSecondsRealtime(waitLen + pauseAfterAnimAndSfx);
 
-
+        // --- Virtue art (fade-in) ---
         if (showSpecialArt && virtueArtPanel != null)
         {
+            yield return StartCoroutine(FadeInPanel(virtueArtPanel, virtueFadeDuration));
+
             if (virtueArtButton != null)
                 virtueArtButton.SetActive(true);
-            yield return StartCoroutine(SlidePanelIn(virtueArtPanel));
 
             yield return new WaitUntil(() => artDismissed);
 
             virtueArtButton.SetActive(false);
-
-            // virtueArtPanel.gameObject.SetActive(false);
         }
 
+        // --- Victory panel (slide) ---
         if (victoryPanel != null)
         {
             yield return StartCoroutine(SlidePanelIn(victoryPanel));
@@ -131,25 +153,45 @@ public class NextLevel : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(pauseAfterPanelSlide);
 
-        // 4. Show the Scene Loader Button
+        // Show the Scene Loader Button
         if (nextLevelButton != null)
             nextLevelButton.SetActive(true);
-        
-        CommitCollectiblesOnWin();
+
+        // Commit collectible shards hanya kalau GameManager valid
+        if (gm != null && gm.data != null)
+        {
+            CommitCollectiblesOnWin();
+        }
     }
 
     public void CommitCollectiblesOnWin()
     {
-        foreach (var id in GameManager.Instance.data.tempCollect)
+        if (GameManager.Instance == null || GameManager.Instance.data == null)
+            return;
+
+        if (GameManager.Instance.data.tempShards == null)
         {
-            if (!GameManager.Instance.data.collectible.Contains(id))
-                GameManager.Instance.data.collectible.Add(id);
+            GameManager.Instance.data.tempShards = new List<CardShardProgress>();
+            GameManager.Instance.SaveGame();
+            return;
         }
 
-        GameManager.Instance.data.tempCollect.Clear();
+        int shardNeededToUnlock = 4;
+
+        foreach (var prog in GameManager.Instance.data.tempShards)
+        {
+            if (prog.shards >= shardNeededToUnlock)
+            {
+                if (!GameManager.Instance.data.collectible.Contains(prog.cardId))
+                {
+                    GameManager.Instance.data.collectible.Add(prog.cardId);
+                }
+            }
+        }
+
+        GameManager.Instance.data.tempShards.Clear();
         GameManager.Instance.SaveGame();
     }
-
 
     private IEnumerator SlidePanelIn(RectTransform panel)
     {
@@ -159,15 +201,42 @@ public class NextLevel : MonoBehaviour
         panel.anchoredPosition = pos;
 
         float t = 0f;
+        float dur = Mathf.Max(0.0001f, slideDuration);
+
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / Mathf.Max(0.0001f, slideDuration);
+            t += Time.unscaledDeltaTime / dur;
             float k = easeCurve.Evaluate(Mathf.Clamp01(t));
             pos.x = Mathf.Lerp(startOffsetX, endX, k);
             panel.anchoredPosition = pos;
             yield return null;
         }
+
         panel.anchoredPosition = new Vector2(endX, panel.anchoredPosition.y);
+    }
+
+    private IEnumerator FadeInPanel(RectTransform panel, float duration)
+    {
+        if (panel == null) yield break;
+
+        var cg = panel.GetComponent<CanvasGroup>();
+        if (cg == null)
+            cg = panel.gameObject.AddComponent<CanvasGroup>();
+
+        panel.gameObject.SetActive(true);
+        cg.alpha = 0f;
+
+        float t = 0f;
+        float dur = Mathf.Max(0.0001f, duration);
+
+        while (t < 1f)
+        {
+            t += Time.unscaledDeltaTime / dur;
+            cg.alpha = Mathf.Lerp(0f, 1f, t);
+            yield return null;
+        }
+
+        cg.alpha = 1f;
     }
 
     // Helper to get length of current/next animation clip
@@ -192,15 +261,16 @@ public class NextLevel : MonoBehaviour
 
         float startVol = source.volume;
         float t = 0f;
+        float dur = Mathf.Max(0.0001f, duration);
 
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / Mathf.Max(0.0001f, duration);
+            t += Time.unscaledDeltaTime / dur;
             source.volume = Mathf.Lerp(startVol, 0f, t);
             yield return null;
         }
 
         source.Stop();
-        source.volume = startVol; // reset for next use
+        source.volume = startVol;
     }
 }

@@ -53,7 +53,8 @@ public class HealthSystem : MonoBehaviour
     {
         if (other.CompareTag("Lava") || other.CompareTag("Meteor"))
         {
-            life--;
+            // life--;
+            TakeDamage(1);
 
             if(life <= 0)
             {
@@ -205,8 +206,7 @@ public class HealthSystem : MonoBehaviour
 
     public void DiscardTempCollectibles()
     {
-        GameManager.Instance.data.tempCollect.Clear();
+        GameManager.Instance.data.tempShards.Clear();
         GameManager.Instance.SaveGame();
     }
-
 }
