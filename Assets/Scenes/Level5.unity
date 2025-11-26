@@ -1776,6 +1776,7 @@ GameObject:
   - component: {fileID: 762948075}
   - component: {fileID: 762948074}
   - component: {fileID: 762948073}
+  - component: {fileID: 762948077}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1860,6 +1861,7 @@ RectTransform:
   m_Children:
   - {fileID: 963907421}
   - {fileID: 866932497}
+  - {fileID: 875960180}
   - {fileID: 7849697727075626055}
   - {fileID: 1060021498}
   - {fileID: 300317888}
@@ -1871,6 +1873,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &762948077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762948072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33332388dabdb9c48924ed7185d2c343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelIntroController
+  playerInput: {fileID: 1535112869}
+  levelTitleGroup: {fileID: 875960181}
+  titleFadeInDuration: 0
+  titleHoldDuration: 2
+  titleFadeOutDuration: 0.6
+  showChallengeThisLevel: 0
+  challengeGroup: {fileID: 0}
+  challengeCloseButton: {fileID: 0}
+  challengeFadeInDuration: 0.5
+  challengeFadeOutDuration: 0.3
 --- !u!1 &769684458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,6 +2373,94 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: cf132698e7f2b1148bcb831f89d304d8, type: 3}
   m_ActionId: 3a0bbd49-bc41-49ab-93ab-f5dc6f71ecce
+--- !u!1 &875960179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 875960180}
+  - component: {fileID: 875960183}
+  - component: {fileID: 875960182}
+  - component: {fileID: 875960181}
+  m_Layer: 5
+  m_Name: LevelIntro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &875960180
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875960179}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 762948076}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &875960181
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875960179}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &875960182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875960179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: eafbbdc10239392409e1ddd42467bdb1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &875960183
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875960179}
+  m_CullTransparentMesh: 1
 --- !u!114 &913798381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2945,6 +3057,54 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7582771417649005438}
+    - target: {fileID: 6018466772247258120, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7582771417649005438}
+    - target: {fileID: 6018466772247258120, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReloadCurrentScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 802900783}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7582771417649005438}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.AudioSource, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SceneController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258951773056980510, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7849697726521965497, guid: 18284ca2461d6ac418e80dff296bed1e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3182,7 +3342,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: d83c31ecd2e1fb84e95a0446dfde8ab4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e100c40c976dc934e958f1bcd2dbcb9a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3218,7 +3378,7 @@ Animator:
   m_GameObject: {fileID: 1187006904}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 174e66e2eaac7a142b64a0dddf293916, type: 2}
+  m_Controller: {fileID: 9100000, guid: c5e880d0eafbf9645a266187eaef7cd8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3323,7 +3483,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.81, y: 4.81}
+    oldSize: {x: 4.8, y: 4.8}
     newSize: {x: 4.81, y: 4.81}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6801,7 +6961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4615630255195311034, guid: edd93ae6e10f7f04dba1b668709b5586, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: MainMenu
+      value: New_MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 4615630255195311034, guid: edd93ae6e10f7f04dba1b668709b5586, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -7015,6 +7175,14 @@ PrefabInstance:
     - target: {fileID: 113877403162947304, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 860141585384407477, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7582771417649005438}
+    - target: {fileID: 860141585384407477, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReloadCurrentScene
       objectReference: {fileID: 0}
     - target: {fileID: 6043485370424895281, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
       propertyPath: m_Name
