@@ -1,0 +1,923 @@
+fileFormatVersion: 2
+guid: 5b503cd6be52b7b45bd6c4fa7693eff9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2882659257941279416
+    second: iblis_mati_8_0
+  - first:
+      213: -3487072771692817711
+    second: iblis_mati_8_1
+  - first:
+      213: 2693643651547354968
+    second: iblis_mati_8_2
+  - first:
+      213: 7282555146442009878
+    second: iblis_mati_8_3
+  - first:
+      213: 9066974546515550216
+    second: iblis_mati_8_4
+  - first:
+      213: -4969796543340475953
+    second: iblis_mati_8_5
+  - first:
+      213: 6589841241935530432
+    second: iblis_mati_8_6
+  - first:
+      213: 5640486031775222710
+    second: iblis_mati_8_7
+  - first:
+      213: 3512976436280225463
+    second: iblis_mati_8_8
+  - first:
+      213: -8645034100677571053
+    second: iblis_mati_8_9
+  - first:
+      213: -3312040738624330226
+    second: iblis_mati_8_10
+  - first:
+      213: 3928652319327372231
+    second: iblis_mati_8_11
+  - first:
+      213: -3647864046575995579
+    second: iblis_mati_8_12
+  - first:
+      213: 4223045737122981618
+    second: iblis_mati_8_13
+  - first:
+      213: -4203637466178065925
+    second: iblis_mati_8_14
+  - first:
+      213: 8967577397072650328
+    second: iblis_mati_8_15
+  - first:
+      213: 6193370115306306134
+    second: iblis_mati_8_16
+  - first:
+      213: -7346386298785977719
+    second: iblis_mati_8_17
+  - first:
+      213: -1916317427078113130
+    second: iblis_mati_8_18
+  - first:
+      213: -886449502344711792
+    second: iblis_mati_8_19
+  - first:
+      213: 8540519156461268201
+    second: iblis_mati_8_20
+  - first:
+      213: 6519545137677591824
+    second: iblis_mati_8_21
+  - first:
+      213: 4470445941153636968
+    second: iblis_mati_8_22
+  - first:
+      213: -5607995931081120544
+    second: iblis_mati_8_23
+  - first:
+      213: 3917341267752075225
+    second: iblis_mati_8_24
+  - first:
+      213: -4365567905676041127
+    second: iblis_mati_8_25
+  - first:
+      213: -1311139049775047417
+    second: iblis_mati_8_26
+  - first:
+      213: -6310372244428442210
+    second: iblis_mati_8_27
+  - first:
+      213: 4415445865883027954
+    second: iblis_mati_8_28
+  - first:
+      213: 5747834438357562373
+    second: iblis_mati_8_29
+  - first:
+      213: 5607129479852782260
+    second: iblis_mati_8_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: iblis_mati_8_0
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 646
+        width: 43
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84d3be98dacbef7d0800000000000000
+      internalID: -2882659257941279416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_1
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 690
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d210591acd6b9fc0800000000000000
+      internalID: -3487072771692817711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_2
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 693
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85757f921aeb16520800000000000000
+      internalID: 2693643651547354968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_3
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 617
+        width: 37
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61d6ed03255d01560800000000000000
+      internalID: 7282555146442009878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_4
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 672
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8006198af4d54dd70800000000000000
+      internalID: 9066974546515550216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_5
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 658
+        width: 11
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc90a3cff5cb70bb0800000000000000
+      internalID: -4969796543340475953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_6
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 220
+        width: 395
+        height: 425
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c949cfe1b1d37b50800000000000000
+      internalID: 6589841241935530432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_7
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 622
+        width: 12
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bbc38c4928074e40800000000000000
+      internalID: 5640486031775222710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 584
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7beecccc47990c030800000000000000
+      internalID: 3512976436280225463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_9
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 580
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31e89fde94ba60880800000000000000
+      internalID: -8645034100677571053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_10
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 558
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e06aca40f744902d0800000000000000
+      internalID: -3312040738624330226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_11
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 551
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c3c5833870658630800000000000000
+      internalID: 3928652319327372231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_12
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 497
+        width: 42
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5453be21afe206dc0800000000000000
+      internalID: -3647864046575995579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_13
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 538
+        width: 29
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f6617729b54b9a30800000000000000
+      internalID: 4223045737122981618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_14
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 511
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf9eeef0ffda9a5c0800000000000000
+      internalID: -4203637466178065925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_15
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 542
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8506650612c337c70800000000000000
+      internalID: 8967577397072650328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_16
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 502
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65a3a555e4543f550800000000000000
+      internalID: 6193370115306306134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_17
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 518
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98aa01685946c0a90800000000000000
+      internalID: -7346386298785977719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_18
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 430
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6985e12047fd765e0800000000000000
+      internalID: -1916317427078113130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_19
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 403
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 091fb6dcfd2b2b3f0800000000000000
+      internalID: -886449502344711792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_20
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 199
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ecea465ce4068670800000000000000
+      internalID: 8540519156461268201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_21
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 196
+        width: 41
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 015e56cb2c31a7a50800000000000000
+      internalID: 6519545137677591824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_22
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 159
+        width: 41
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 862ac06e5e63a0e30800000000000000
+      internalID: 4470445941153636968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_23
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 206
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e4e212c9656c22b0800000000000000
+      internalID: -5607995931081120544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_24
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 191
+        width: 30
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9df3758c0213d5630800000000000000
+      internalID: 3917341267752075225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_25
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 178
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 954655b9e136a63c0800000000000000
+      internalID: -4365567905676041127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_26
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 131
+        width: 32
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70dd30f1bf5edcde0800000000000000
+      internalID: -1311139049775047417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_27
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 153
+        width: 21
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e95bb52a0ed0d68a0800000000000000
+      internalID: -6310372244428442210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_28
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 192
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f9cce8fe90d64d30800000000000000
+      internalID: 4415445865883027954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_29
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 165
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5043f06e7f864cf40800000000000000
+      internalID: 5747834438357562373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iblis_mati_8_30
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 140
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b2fe38dd8680dd40800000000000000
+      internalID: 5607129479852782260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      iblis_mati_8_0: -2882659257941279416
+      iblis_mati_8_1: -3487072771692817711
+      iblis_mati_8_10: -3312040738624330226
+      iblis_mati_8_11: 3928652319327372231
+      iblis_mati_8_12: -3647864046575995579
+      iblis_mati_8_13: 4223045737122981618
+      iblis_mati_8_14: -4203637466178065925
+      iblis_mati_8_15: 8967577397072650328
+      iblis_mati_8_16: 6193370115306306134
+      iblis_mati_8_17: -7346386298785977719
+      iblis_mati_8_18: -1916317427078113130
+      iblis_mati_8_19: -886449502344711792
+      iblis_mati_8_2: 2693643651547354968
+      iblis_mati_8_20: 8540519156461268201
+      iblis_mati_8_21: 6519545137677591824
+      iblis_mati_8_22: 4470445941153636968
+      iblis_mati_8_23: -5607995931081120544
+      iblis_mati_8_24: 3917341267752075225
+      iblis_mati_8_25: -4365567905676041127
+      iblis_mati_8_26: -1311139049775047417
+      iblis_mati_8_27: -6310372244428442210
+      iblis_mati_8_28: 4415445865883027954
+      iblis_mati_8_29: 5747834438357562373
+      iblis_mati_8_3: 7282555146442009878
+      iblis_mati_8_30: 5607129479852782260
+      iblis_mati_8_4: 9066974546515550216
+      iblis_mati_8_5: -4969796543340475953
+      iblis_mati_8_6: 6589841241935530432
+      iblis_mati_8_7: 5640486031775222710
+      iblis_mati_8_8: 3512976436280225463
+      iblis_mati_8_9: -8645034100677571053
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
