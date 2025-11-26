@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class CollectibleCard : MonoBehaviour
 {
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip cardSfx;
+
     [Header("Card Settings")]
     public string cardID;          
     public int shardAmount = 1;   
@@ -51,6 +54,8 @@ public class CollectibleCard : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+
+        sfxSource.PlayOneShot(cardSfx);
 
         // Tambah shard ke progress level ini
         GameManager.Instance.AddTempShard(cardID, shardAmount, shardNeeded);

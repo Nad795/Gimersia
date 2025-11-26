@@ -208,6 +208,19 @@ public class HealthSystem : MonoBehaviour
 
     public void DiscardTempCollectibles()
     {
+        if (GameManager.Instance == null || GameManager.Instance.data == null)
+            return;
+
+        // Jika tidak ada shard yang dikumpulkan di level ini → tidak usah discard
+        if (GameManager.Instance.data.tempShards == null || GameManager.Instance.data.tempShards.Count == 0)
+        {
+            Debug.Log("[HealthSystem] Tidak ada shard yang dikumpulkan. Tidak ada yang perlu di-discard.");
+            return;
+        }
+
+        // Jika ada shard → hapus semuanya (karena player kalah)
+        Debug.Log("[HealthSystem] Player kalah. Menghapus tempShards yang terkumpul di level ini.");
+
         GameManager.Instance.data.tempShards.Clear();
         GameManager.Instance.SaveGame();
     }

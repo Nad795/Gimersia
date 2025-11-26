@@ -355,7 +355,7 @@ PrefabInstance:
     - target: {fileID: 3909841954408459657, guid: 6498423f9234041459d39ba42a6ce8fb, type: 3}
       propertyPath: levelBgmSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 840315595}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1570,14 +1570,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelIntroController
   playerInput: {fileID: 1535112869}
   levelTitleGroup: {fileID: 1562058228}
-  titleFadeInDuration: 0
-  titleHoldDuration: 2
-  titleFadeOutDuration: 0.6
+  titleHoldDuration: 2.5
   showChallengeThisLevel: 1
   challengeGroup: {fileID: 954532359}
   challengeCloseButton: {fileID: 2130118471}
-  challengeFadeInDuration: 0.5
-  challengeFadeOutDuration: 0.3
+  meteorSpawners: []
 --- !u!1 &769684458
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,9 +3000,10 @@ MonoBehaviour:
   winTrigger: Win
   winSfxSource: {fileID: 769684460}
   winSfx: {fileID: 8300000, guid: c829e131ff925c545ae8c920b76969e0, type: 3}
-  levelBgmSource: {fileID: 0}
+  levelBgmSource: {fileID: 840315595}
   victoryPanel: {fileID: 7849697726533365256}
   nextLevelButton: {fileID: 6346632399598276600}
+  restartButton: {fileID: 6346632399598276601}
   slideDuration: 1
   startOffsetX: -3000
   endX: 0
@@ -5973,6 +5971,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 802900783}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 954532357}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -6557,6 +6567,11 @@ PrefabInstance:
 --- !u!1 &6346632399598276600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7653683525307164301, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
+  m_PrefabInstance: {fileID: 6346632399598276599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6346632399598276601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8618607084816559083, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
   m_PrefabInstance: {fileID: 6346632399598276599}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7582771417649005438

@@ -393,6 +393,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 1959400526}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 6
       objectReference: {fileID: 0}
@@ -697,7 +705,7 @@ PrefabInstance:
     - target: {fileID: 3909841954408459657, guid: 6498423f9234041459d39ba42a6ce8fb, type: 3}
       propertyPath: levelBgmSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1122821594}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1436,7 +1444,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8618607084816559083, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
@@ -1581,6 +1590,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 1959400526}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 6
       objectReference: {fileID: 0}
@@ -1661,6 +1678,14 @@ PrefabInstance:
       propertyPath: cardID
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 1959400526}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 6
@@ -1804,6 +1829,14 @@ PrefabInstance:
       propertyPath: cardID
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 1959400526}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 6
@@ -2199,14 +2232,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelIntroController
   playerInput: {fileID: 1535112869}
   levelTitleGroup: {fileID: 1863380105}
-  titleFadeInDuration: 0
-  titleHoldDuration: 2
-  titleFadeOutDuration: 0.6
+  titleHoldDuration: 2.5
   showChallengeThisLevel: 0
   challengeGroup: {fileID: 0}
   challengeCloseButton: {fileID: 0}
-  challengeFadeInDuration: 0.5
-  challengeFadeOutDuration: 0.3
+  meteorSpawners: []
 --- !u!1 &769684458
 GameObject:
   m_ObjectHideFlags: 0
@@ -3791,9 +3821,10 @@ MonoBehaviour:
   winTrigger: Win
   winSfxSource: {fileID: 769684460}
   winSfx: {fileID: 8300000, guid: c829e131ff925c545ae8c920b76969e0, type: 3}
-  levelBgmSource: {fileID: 0}
+  levelBgmSource: {fileID: 1122821594}
   victoryPanel: {fileID: 7849697726533365256}
   nextLevelButton: {fileID: 6346632399598276600}
+  restartButton: {fileID: 6346632399598276601}
   slideDuration: 1
   startOffsetX: -3000
   endX: 0
@@ -5291,6 +5322,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 1959400526}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 6
       objectReference: {fileID: 0}
@@ -5639,6 +5678,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 1959400526}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 6
       objectReference: {fileID: 0}
@@ -5880,6 +5927,7 @@ Transform:
   - {fileID: 2020575164}
   - {fileID: 459933304}
   - {fileID: 748064842}
+  - {fileID: 1959400525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1859636546
@@ -6199,6 +6247,135 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938246027}
   m_CullTransparentMesh: 1
+--- !u!1 &1959400524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1959400525}
+  - component: {fileID: 1959400526}
+  m_Layer: 0
+  m_Name: CoinSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1959400525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959400524}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1824855757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1959400526
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959400524}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1966706654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10387,6 +10564,11 @@ PrefabInstance:
 --- !u!1 &6346632399598276600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7653683525307164301, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
+  m_PrefabInstance: {fileID: 6346632399598276599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6346632399598276601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8618607084816559083, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
   m_PrefabInstance: {fileID: 6346632399598276599}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7582771417649005438

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d7acfe92d6a2a4c40985dc77e1e4921a
+guid: 4d82ae65c60021d49be3a970ab074098
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2958720544673896517
-    second: hELL TO HOLLY Icon_0
+      213: 4179036363503788081
+    second: MainMenuFRRR_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hELL TO HOLLY Icon_0
+      name: MainMenuFRRR_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1925
-        height: 2453
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54810fec8ac7f0920800000000000000
-      internalID: 2958720544673896517
+      spriteID: 130651e5e6beef930800000000000000
+      internalID: 4179036363503788081
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      hELL TO HOLLY Icon_0: 2958720544673896517
+      MainMenuFRRR_0: 4179036363503788081
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

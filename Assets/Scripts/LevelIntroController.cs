@@ -10,16 +10,15 @@ public class LevelIntroController : MonoBehaviour
 
     [Header("Level Title Panel")]
     [SerializeField] private CanvasGroup levelTitleGroup;   // panel "LEVEL 1-1 THE SILENT DESCENT"
-    [SerializeField] private float titleFadeInDuration = 0.6f;
-    [SerializeField] private float titleHoldDuration   = 1.5f;
-    [SerializeField] private float titleFadeOutDuration = 0.6f;
+    [SerializeField] private float titleHoldDuration = 1.5f;
 
     [Header("New Challenge Panel (opsional)")]
     [SerializeField] private bool showChallengeThisLevel = false;
     [SerializeField] private CanvasGroup challengeGroup;   // panel challenge baru
     [SerializeField] private Button challengeCloseButton;  // tombol Close di panel challenge
-    [SerializeField] private float challengeFadeInDuration  = 0.5f;
-    [SerializeField] private float challengeFadeOutDuration = 0.3f;
+
+    [Header("Meteor Control (opsional)")]
+    [SerializeField] private MeteorSpawner[] meteorSpawners; // kalau kosong, akan dicari otomatis
 
     private bool challengeClosed = false;
 
@@ -28,17 +27,21 @@ public class LevelIntroController : MonoBehaviour
         if (playerInput == null)
             playerInput = FindObjectOfType<PlayerInput>();
 
-        // Pastikan panel awalnya dalam keadaan tidak terlihat
+        if (meteorSpawners == null || meteorSpawners.Length == 0)
+            meteorSpawners = FindObjectsOfType<MeteorSpawner>();
+
+        // Panel level title: awalnya nonaktif
         if (levelTitleGroup != null)
         {
-            levelTitleGroup.gameObject.SetActive(true);
-            levelTitleGroup.alpha = 0f;
+            levelTitleGroup.gameObject.SetActive(false);
+            levelTitleGroup.alpha = 1f; // tidak pakai fade, langsung full
         }
 
+        // Panel challenge: awalnya nonaktif
         if (challengeGroup != null)
         {
-            challengeGroup.gameObject.SetActive(false); // baru aktif saat dibutuhkan
-            challengeGroup.alpha = 0f;
+            challengeGroup.gameObject.SetActive(false);
+            challengeGroup.alpha = 1f;  // langsung full
         }
     }
 
@@ -53,12 +56,24 @@ public class LevelIntroController : MonoBehaviour
         if (playerInput != null)
             playerInput.enabled = false;
 
-        // === 1. LEVEL TITLE ===
+        // Pause jatuhnya meteor
+        if (meteorSpawners != null)
+        {
+            foreach (var spawner in meteorSpawners)
+            {
+                if (spawner != null)
+                    spawner.PauseSpawning();
+            }
+        }
+
+        // === 1. LEVEL TITLE === (tanpa fade: langsung muncul, tunggu, lalu hilang)
         if (levelTitleGroup != null)
         {
-            yield return StartCoroutine(FadeCanvasGroup(levelTitleGroup, 0f, 1f, titleFadeInDuration));
+            levelTitleGroup.gameObject.SetActive(true);
+            levelTitleGroup.alpha = 1f;
+
             yield return new WaitForSecondsRealtime(titleHoldDuration);
-            yield return StartCoroutine(FadeCanvasGroup(levelTitleGroup, 1f, 0f, titleFadeOutDuration));
+
             levelTitleGroup.gameObject.SetActive(false);
         }
 
@@ -67,18 +82,14 @@ public class LevelIntroController : MonoBehaviour
         {
             challengeClosed = false;
 
-            // Aktifkan panel + tombol close
             challengeGroup.gameObject.SetActive(true);
-            challengeGroup.alpha = 0f;
+            challengeGroup.alpha = 1f;
 
             if (challengeCloseButton != null)
             {
                 challengeCloseButton.onClick.AddListener(OnChallengeCloseClicked);
                 challengeCloseButton.interactable = true;
             }
-
-            // Fade-in panel challenge
-            yield return StartCoroutine(FadeCanvasGroup(challengeGroup, 0f, 1f, challengeFadeInDuration));
 
             // Tunggu sampai tombol close ditekan
             yield return new WaitUntil(() => challengeClosed);
@@ -89,37 +100,27 @@ public class LevelIntroController : MonoBehaviour
                 challengeCloseButton.interactable = false;
             }
 
-            // Fade-out panel challenge (kalau mau langsung hilang, bisa skip bagian ini)
-            yield return StartCoroutine(FadeCanvasGroup(challengeGroup, 1f, 0f, challengeFadeOutDuration));
+            // Tanpa fade, langsung hilang
             challengeGroup.gameObject.SetActive(false);
         }
 
         // Nyalakan lagi input player setelah semua intro selesai
         if (playerInput != null)
             playerInput.enabled = true;
+
+        // Resume jatuhnya meteor
+        if (meteorSpawners != null)
+        {
+            foreach (var spawner in meteorSpawners)
+            {
+                if (spawner != null)
+                    spawner.ResumeSpawning();
+            }
+        }
     }
 
     private void OnChallengeCloseClicked()
     {
         challengeClosed = true;
-    }
-
-    // Utility fade in/out
-    private IEnumerator FadeCanvasGroup(CanvasGroup cg, float from, float to, float duration)
-    {
-        if (cg == null) yield break;
-
-        duration = Mathf.Max(0.0001f, duration);
-        cg.alpha = from;
-
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.unscaledDeltaTime / duration;
-            cg.alpha = Mathf.Lerp(from, to, t);
-            yield return null;
-        }
-
-        cg.alpha = to;
     }
 }

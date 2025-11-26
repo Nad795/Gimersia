@@ -18,6 +18,7 @@ public class NextLevel : MonoBehaviour
     [Header("Victory UI")]
     [SerializeField] private RectTransform victoryPanel;
     [SerializeField] private GameObject nextLevelButton;
+    [SerializeField] private GameObject restartButton;
     [SerializeField] private float slideDuration = 0.6f;
     [SerializeField] private float startOffsetX = -1000f;
     [SerializeField] private float endX = 0f;
@@ -47,6 +48,9 @@ public class NextLevel : MonoBehaviour
     {
         if (nextLevelButton != null)
             nextLevelButton.SetActive(false);
+        
+        if (restartButton != null)          
+            restartButton.SetActive(false); 
 
         if (virtueArtPanel != null)
         {
@@ -156,6 +160,9 @@ public class NextLevel : MonoBehaviour
         // Show the Scene Loader Button
         if (nextLevelButton != null)
             nextLevelButton.SetActive(true);
+
+        if (restartButton != null)
+            restartButton.SetActive(true);
 
         // Commit collectible shards hanya kalau GameManager valid
         if (gm != null && gm.data != null)

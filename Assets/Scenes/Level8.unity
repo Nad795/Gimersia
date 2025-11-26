@@ -317,6 +317,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 875160840}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 5
       objectReference: {fileID: 0}
@@ -640,7 +648,7 @@ PrefabInstance:
     - target: {fileID: 3909841954408459657, guid: 6498423f9234041459d39ba42a6ce8fb, type: 3}
       propertyPath: levelBgmSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1657685087}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -935,7 +943,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8618607084816559083, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
@@ -1728,14 +1737,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelIntroController
   playerInput: {fileID: 1535112869}
   levelTitleGroup: {fileID: 1871941961}
-  titleFadeInDuration: 0
-  titleHoldDuration: 2
-  titleFadeOutDuration: 0.6
+  titleHoldDuration: 2.5
   showChallengeThisLevel: 0
   challengeGroup: {fileID: 0}
   challengeCloseButton: {fileID: 0}
-  challengeFadeInDuration: 0.5
-  challengeFadeOutDuration: 0.3
+  meteorSpawners: []
 --- !u!1 &769684458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2137,6 +2143,135 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: cf132698e7f2b1148bcb831f89d304d8, type: 3}
   m_ActionId: 3a0bbd49-bc41-49ab-93ab-f5dc6f71ecce
+--- !u!1 &875160838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 875160839}
+  - component: {fileID: 875160840}
+  m_Layer: 0
+  m_Name: CoinSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &875160839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875160838}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1824855757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &875160840
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875160838}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &913798381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2945,6 +3080,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 875160840}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 5
       objectReference: {fileID: 0}
@@ -3089,9 +3232,10 @@ MonoBehaviour:
   winTrigger: Win
   winSfxSource: {fileID: 769684460}
   winSfx: {fileID: 8300000, guid: c829e131ff925c545ae8c920b76969e0, type: 3}
-  levelBgmSource: {fileID: 0}
+  levelBgmSource: {fileID: 1657685087}
   victoryPanel: {fileID: 7849697726533365256}
   nextLevelButton: {fileID: 6346632399598276600}
+  restartButton: {fileID: 6346632399598276601}
   slideDuration: 1
   startOffsetX: -3000
   endX: 0
@@ -3957,6 +4101,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 875160840}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 5
       objectReference: {fileID: 0}
@@ -4455,6 +4607,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 875160840}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 5
       objectReference: {fileID: 0}
@@ -4510,6 +4670,7 @@ Transform:
   - {fileID: 188776868}
   - {fileID: 622109951}
   - {fileID: 1865699172}
+  - {fileID: 875160839}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1859636546
@@ -7441,6 +7602,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: cardSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c48db47eddb3b1d4d87ddd48271afd46, type: 3}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 875160840}
+    - target: {fileID: 6237920526100920847, guid: 5fc5a15e4ad18364c91d8ed39dd6b43d, type: 3}
       propertyPath: shardNeeded
       value: 5
       objectReference: {fileID: 0}
@@ -7988,6 +8157,11 @@ PrefabInstance:
 --- !u!1 &6346632399598276600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7653683525307164301, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
+  m_PrefabInstance: {fileID: 6346632399598276599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6346632399598276601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8618607084816559083, guid: 208b5137cfb55b34c990cfe8ca26a39c, type: 3}
   m_PrefabInstance: {fileID: 6346632399598276599}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7582771417649005438
