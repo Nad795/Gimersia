@@ -273,8 +273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   playerController: {fileID: 2412732255134496065}
   gameOver: {fileID: 0}
-  life: 3
-  maxLife: 5
+  life: 1
+  maxLife: 1
   shieldAmount: 0
   shieldVisual: {fileID: 6477692159374635684}
   sfxSource: {fileID: 0}
