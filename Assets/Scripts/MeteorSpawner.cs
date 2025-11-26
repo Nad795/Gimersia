@@ -20,6 +20,10 @@ public class MeteorSpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnLoop());
+    }
+
+    void Update()
+    {
         yMax = Camera.main.transform.position.y + Camera.main.orthographicSize + 5f;
     }
 
