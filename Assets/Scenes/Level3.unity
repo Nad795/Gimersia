@@ -553,6 +553,10 @@ PrefabInstance:
       propertyPath: sfxSource
       value: 
       objectReference: {fileID: 418152415}
+    - target: {fileID: 2412732255134496065, guid: 6498423f9234041459d39ba42a6ce8fb, type: 3}
+      propertyPath: uiRaycaster
+      value: 
+      objectReference: {fileID: 762948073}
     - target: {fileID: 3909841954408459657, guid: 6498423f9234041459d39ba42a6ce8fb, type: 3}
       propertyPath: life
       value: 1
@@ -1201,7 +1205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1463,8 +1467,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 742382783}
   - {fileID: 963907421}
+  - {fileID: 742382783}
   - {fileID: 7849697727075626055}
   - {fileID: 1060021498}
   - {fileID: 7849697726533365256}

@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Dynamic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -89,6 +91,9 @@ public class PlayerController : MonoBehaviour
     [Header("Run Smoke VFX")]
     [SerializeField] private ParticleSystem runSmokeVFX;
 
+    [Header("UI")]
+    [SerializeField] private GraphicRaycaster uiRaycaster;
+
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -98,17 +103,19 @@ public class PlayerController : MonoBehaviour
         healthSystem = GetComponent<HealthSystem>();
         playerSprite = GetComponent<SpriteRenderer>();
         originalGravityScale = rb.gravityScale;
+
+        if (uiRaycaster == null)
+            uiRaycaster = FindObjectOfType<GraphicRaycaster>();
     }
 
     private void Update()
     {
-
         horizontalInput = moveInput.x;
 
         HandleChecks();
         Flip();
         HandleAnimations();
-        
+
         // Coyote Time
         if (isGrounded)
             coyoteTimeCounter = coyoteTime;
@@ -190,7 +197,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
-            if (sfxSource != null || jumpSfx != null)
+            if (sfxSource != null && jumpSfx != null)
                 sfxSource.PlayOneShot(jumpSfx);
 
             coyoteTimeCounter = 0f;
@@ -201,9 +208,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
-            if (sfxSource != null || jumpSfx != null)
+            if (sfxSource != null && jumpSfx != null)
                 sfxSource.PlayOneShot(jumpSfx);
-                
+
             jumpBufferTimeCounter = 0f;
             jumpPressed = false;
         }
@@ -215,7 +222,7 @@ public class PlayerController : MonoBehaviour
     private void HandleChecks()
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
-        
+
         if (!isStunned)
         {
             isTouchingWall = Physics2D.OverlapBox(wallCheck.position, wallCheckSize, 0f, groundLayer);
@@ -278,7 +285,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void Flip()
     {
         if (wallBounceLockoutTimeCounter <= 0f && horizontalInput != 0 && !justWallBounced)
@@ -296,7 +302,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
-        // Ignore *any* jump input if paused or pointer is over UI
+        // Langsung (tanpa queue), tapi pakai raycast UI custom (tidak pakai IsPointerOverGameObject)
         if (Time.timeScale == 0f || IsPointerOverUI()) return;
 
         jumpHeld = value.isPressed;
@@ -346,7 +352,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator StunRoutine(float stunDuration, Vector2 knockbackForce)
     {
         CancelDash();
-    
+
         isStunned = true;
         isDashStunned = true;
 
@@ -397,20 +403,34 @@ public class PlayerController : MonoBehaviour
     // ----- UI hit-test helper (mouse & touch) -----
     private bool IsPointerOverUI()
     {
-        if (EventSystem.current == null) return false;
+        if (EventSystem.current == null || uiRaycaster == null)
+            return false;
 
-        // Mouse / pen
-        if (EventSystem.current.IsPointerOverGameObject())
-            return true;
+        // Siapkan event data
+        var eventData = new PointerEventData(EventSystem.current);
+        Vector2 pointerPos;
 
-        // Touch (primary)
-        if (Touchscreen.current != null)
+        // Cek touch dulu (mobile)
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
-            int fingerId = Touchscreen.current.primaryTouch.touchId.ReadValue();
-            if (EventSystem.current.IsPointerOverGameObject(fingerId))
-                return true;
+            pointerPos = Touchscreen.current.primaryTouch.position.ReadValue();
+        }
+        // Kalau tidak ada touch, pakai mouse (PC/editor)
+        else if (Mouse.current != null)
+        {
+            pointerPos = Mouse.current.position.ReadValue();
+        }
+        else
+        {
+            return false;
         }
 
-        return false;
+        eventData.position = pointerPos;
+
+        // Raycast ke semua UI yang ada di Canvas dengan GraphicRaycaster
+        var results = new List<RaycastResult>();
+        uiRaycaster.Raycast(eventData, results);
+
+        return results.Count > 0;
     }
 }
