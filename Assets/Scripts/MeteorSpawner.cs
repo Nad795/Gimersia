@@ -4,12 +4,15 @@ using System.Collections;
 public class MeteorSpawner : MonoBehaviour
 {
     public GameObject meteorPrefab;
+    public GameObject warningPrefab;
+    public float warningDuration = 1f;
 
     [Header("Spawn Settings")]
     public float spawnInterval = 2f;
     public float xMin = -7f;
     public float xMax = 7f;
-    public float yMax = 60f;
+    public float yMax;
+
     public int maxMeteorCount = 10;
 
     private bool spawning = true;
@@ -17,6 +20,7 @@ public class MeteorSpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnLoop());
+        yMax = Camera.main.transform.position.y + Camera.main.orthographicSize + 5f;
     }
 
     private IEnumerator SpawnLoop()
@@ -36,13 +40,27 @@ public class MeteorSpawner : MonoBehaviour
     private void SpawnMeteor()
     {
         float randomX = Random.Range(xMin, xMax);
-        Vector2 spawnPosition = new Vector2(randomX, yMax);
 
-        Instantiate(meteorPrefab, spawnPosition, Quaternion.identity);
+        float warningPos = Camera.main.transform.position.y + Camera.main.orthographicSize - 1f;
+        Vector2 warningPosition = new Vector2(randomX, warningPos);
+
+        GameObject warning = Instantiate(warningPrefab, warningPosition, Quaternion.identity);
+        StartCoroutine(SpawnMeteorAfterWarning(randomX, warning, warningPos));
     }
 
     public void StopSpawning()
     {
         spawning = false;
     }
+
+    private IEnumerator SpawnMeteorAfterWarning(float xPos, GameObject warning, float warningY)
+    {
+        yield return new WaitForSeconds(warningDuration);
+
+        Vector2 meteorPosition = new Vector2(xPos, yMax);
+        Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+
+        Destroy(warning);
+    }
+
 }

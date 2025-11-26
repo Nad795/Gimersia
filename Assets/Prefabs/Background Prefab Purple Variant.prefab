@@ -11,15 +11,31 @@ PrefabInstance:
     - target: {fileID: 1893205635099341713, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2662462257903650148, guid: 86ae3f09b04e78d499a7fb642af65cc4, type: 3}
+      objectReference: {fileID: 6388391887645938035, guid: 28f7ad5974800094584652da8faa4c21, type: 3}
     - target: {fileID: 3600305912312336548, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2662462257903650148, guid: 86ae3f09b04e78d499a7fb642af65cc4, type: 3}
+      objectReference: {fileID: 3479261645248562491, guid: ce64e18c58aeea341ad7cea4fd271908, type: 3}
+    - target: {fileID: 6515676994414451343, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 26.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293523762328750725, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.17
+      objectReference: {fileID: 0}
     - target: {fileID: 7645303737047516150, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2662462257903650148, guid: 86ae3f09b04e78d499a7fb642af65cc4, type: 3}
+      objectReference: {fileID: 6388391887645938035, guid: 28f7ad5974800094584652da8faa4c21, type: 3}
+    - target: {fileID: 7645303737047516150, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994071204322794758, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8469306002570450238, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
       propertyPath: m_Name
       value: Background Prefab Purple Variant
@@ -83,7 +99,7 @@ PrefabInstance:
     - target: {fileID: 9063616203779804952, guid: ca27fb14398f5f041beef5ec88ad7960, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2662462257903650148, guid: 86ae3f09b04e78d499a7fb642af65cc4, type: 3}
+      objectReference: {fileID: 6388391887645938035, guid: 28f7ad5974800094584652da8faa4c21, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

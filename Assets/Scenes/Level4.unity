@@ -623,6 +623,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7898681522315135501, guid: f38ca15bf25037d41a5bb821779143fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9017060951374648758, guid: f38ca15bf25037d41a5bb821779143fc, type: 3}
       propertyPath: m_Name
       value: Background Prefab Purple Variant
