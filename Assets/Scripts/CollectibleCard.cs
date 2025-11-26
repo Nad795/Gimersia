@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CollectibleCard : MonoBehaviour
 {
+    public string cardID;
     public bool destroySelfOnHit = true;
     public int shieldAmount = 1;
 
@@ -26,7 +27,8 @@ public class CollectibleCard : MonoBehaviour
         {
             Debug.Log("Card collected by player");
             
-            
+            if (!GameManager.Instance.data.tempCollect.Contains(cardID))
+                GameManager.Instance.data.tempCollect.Add(cardID);
 
             HealthSystem health = other.GetComponent<HealthSystem>();
             
