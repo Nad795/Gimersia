@@ -16,12 +16,12 @@ public class Meteor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Meteor collided with " + other.name);
+        // Debug.Log("Meteor collided with " + other.name);
         // Check if the object we hit has a HealthSystem
         // This works better than Tags because it targets the capability, not the name.
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Meteor hit player");
+            // Debug.Log("Meteor hit player");
             HealthSystem health = other.GetComponent<HealthSystem>();
             
             if (health != null)

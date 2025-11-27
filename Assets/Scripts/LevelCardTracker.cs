@@ -9,8 +9,8 @@ public class LevelCardTracker : MonoBehaviour
     [SerializeField] private int totalCards;
     [SerializeField] private int collectedCards;
 
-    // [Header("Optional UI")]
-    // [SerializeField] private TextMeshProUGUI counterText; // Drag a UI Text here: "0/3"
+    [Header("Optional UI")]
+    [SerializeField] private TextMeshProUGUI counterText; // Drag a UI Text here: "0/3"
 
     private void Awake()
     {
@@ -24,24 +24,24 @@ public class LevelCardTracker : MonoBehaviour
         CollectibleCard[] cards = FindObjectsByType<CollectibleCard>(FindObjectsSortMode.None);
         totalCards = cards.Length;
 
-        Debug.Log($"LevelCardTracker: Found {totalCards} collectible cards in the level.");
+        // Debug.Log($"LevelCardTracker: Found {totalCards} collectible cards in the level.");
 
-        // UpdateUI();
+        UpdateUI();
     }
 
     public void ReportCardCollected()
     {
         collectedCards++;
-        // UpdateUI();
+        UpdateUI();
     }
 
-    // private void UpdateUI()
-    // {
-    //     if (counterText != null)
-    //     {
-    //         counterText.text = $"{collectedCards} / {totalCards}";
-    //     }
-    // }
+    private void UpdateUI()
+    {
+        if (counterText != null)
+        {
+            counterText.text = $"{collectedCards} / {totalCards}";
+        }
+    }
 
     public bool HasCollectedAllCards()
     {

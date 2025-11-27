@@ -18,7 +18,8 @@ public class MeteorSpawner : MonoBehaviour
     [Header("Player Ref")]
     [SerializeField] private Transform player;
 
-    private bool spawning = true;
+    private bool spawning = true;   // tetap dipakai untuk stop permanen (misal saat game over)
+    private bool paused = false;    // dipakai untuk pause sementara (misal saat level intro)
 
     // simpan ketinggian tertinggi yang pernah dicapai player
     private float highestPlayerY;
@@ -50,7 +51,8 @@ public class MeteorSpawner : MonoBehaviour
     {
         while (spawning)
         {
-            if (GameObject.FindGameObjectsWithTag("Meteor").Length < maxMeteorCount)
+            // Kalau sedang pause, skip spawn tapi tetap loop
+            if (!paused && GameObject.FindGameObjectsWithTag("Meteor").Length < maxMeteorCount)
             {
                 SpawnMeteor();
             }
@@ -77,15 +79,30 @@ public class MeteorSpawner : MonoBehaviour
 
     public void StopSpawning()
     {
+        // stop permanen, dipakai misal saat game over atau menang
         spawning = false;
+    }
+
+    public void PauseSpawning()
+    {
+        // pause sementara (dipakai LevelIntroController)
+        paused = true;
+    }
+
+    public void ResumeSpawning()
+    {
+        paused = false;
     }
 
     private IEnumerator SpawnMeteorAfterWarning(float xPos, GameObject warning, float meteorY)
     {
         yield return new WaitForSeconds(warningDuration);
 
-        Vector2 meteorPosition = new Vector2(xPos, meteorY);
-        Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+        if (!paused && spawning)  // jangan spawn kalau sudah di-stop/permanen atau sedang pause
+        {
+            Vector2 meteorPosition = new Vector2(xPos, meteorY);
+            Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+        }
 
         Destroy(warning);
     }

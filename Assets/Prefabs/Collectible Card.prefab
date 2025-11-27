@@ -150,5 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f607346452c4e41896e9d6478c23d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleCard
+  cardID: 
+  shardAmount: 1
+  shardNeeded: 4
   destroySelfOnHit: 1
   shieldAmount: 1
+  floatAmplitude: 0.125
+  floatFrequency: 2
+  rotationSpeed: 0
