@@ -45,6 +45,7 @@ public class NextLevel : MonoBehaviour
 
     private bool triggered;
     [SerializeField] private GameObject pauseButton;
+    [SerializeField] private GameObject tutorButton;
     private bool levelSaved = false;
 
     private void Start()
@@ -123,6 +124,8 @@ public class NextLevel : MonoBehaviour
         }
 
         if (pauseButton != null) pauseButton.SetActive(false);
+
+        if (tutorButton != null) tutorButton.SetActive(false);
 
         if (doorAnimator != null && !string.IsNullOrEmpty(winTrigger))
             doorAnimator.SetTrigger(winTrigger);
