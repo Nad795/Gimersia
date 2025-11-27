@@ -2956,6 +2956,7 @@ MonoBehaviour:
   unlockLevelValue: 2
   maxLevel: 9
   pauseButton: {fileID: 963907420}
+  tutorButton: {fileID: 1032518706}
 --- !u!61 &1187006909
 BoxCollider2D:
   m_ObjectHideFlags: 0
