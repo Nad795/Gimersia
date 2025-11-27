@@ -24,7 +24,7 @@ public class LevelCardTracker : MonoBehaviour
         CollectibleCard[] cards = FindObjectsByType<CollectibleCard>(FindObjectsSortMode.None);
         totalCards = cards.Length;
 
-        Debug.Log($"LevelCardTracker: Found {totalCards} collectible cards in the level.");
+        // Debug.Log($"LevelCardTracker: Found {totalCards} collectible cards in the level.");
 
         UpdateUI();
     }

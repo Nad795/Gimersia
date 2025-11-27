@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         // Guard kalau data atau list masih null entah kenapa
         if (data == null)
         {
-            Debug.LogWarning("[GameManager] data null saat AddTempShard, inisialisasi ulang SaveData.");
+            // Debug.LogWarning("[GameManager] data null saat AddTempShard, inisialisasi ulang SaveData.");
             data = new SaveData();
         }
 

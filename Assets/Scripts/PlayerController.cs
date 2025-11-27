@@ -406,28 +406,27 @@ public class PlayerController : MonoBehaviour
         if (EventSystem.current == null || uiRaycaster == null)
             return false;
 
-        // Siapkan event data
         var eventData = new PointerEventData(EventSystem.current);
         Vector2 pointerPos;
 
-        // Cek touch dulu (mobile)
+        // 1. Cek touch (harus sedang menyentuh layar)
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
             pointerPos = Touchscreen.current.primaryTouch.position.ReadValue();
         }
-        // Kalau tidak ada touch, pakai mouse (PC/editor)
-        else if (Mouse.current != null)
+        // 2. Cek mouse, tapi HANYA kalau lagi klik (bukan sekadar hover)
+        else if (Mouse.current != null && Mouse.current.leftButton.isPressed)
         {
             pointerPos = Mouse.current.position.ReadValue();
         }
         else
         {
+            // Tidak ada input pointer aktif → jangan blokir keyboard
             return false;
         }
 
         eventData.position = pointerPos;
 
-        // Raycast ke semua UI yang ada di Canvas dengan GraphicRaycaster
         var results = new List<RaycastResult>();
         uiRaycaster.Raycast(eventData, results);
 

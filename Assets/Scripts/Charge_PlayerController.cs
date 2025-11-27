@@ -225,7 +225,7 @@ public class Charge_PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision detected with " + collision.gameObject.name);
+        // Debug.Log("Collision detected with " + collision.gameObject.name);
         // 1. We only care about collisions that happen IN THE AIR.
         if (isGrounded)
         {

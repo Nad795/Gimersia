@@ -83,17 +83,17 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("About to take " + damage + " damage");
+        // Debug.Log("About to take " + damage + " damage");
 
         if (isInvulnerable)
         {
-            Debug.Log("Currently invulnerable, no damage taken");
+            // Debug.Log("Currently invulnerable, no damage taken");
             return;
         }
 
         if (shieldAmount > 0)
         {
-            Debug.Log("Shield absorbed damage");
+            // Debug.Log("Shield absorbed damage");
 
             shieldAmount--;
             
@@ -108,12 +108,12 @@ public class HealthSystem : MonoBehaviour
         }
 
         life -= damage;
-        Debug.Log("Took " + damage + " damage, life is now " + life);
+        // Debug.Log("Took " + damage + " damage, life is now " + life);
 
         if (life <= 0)
         {
 
-            Debug.Log("Life has reached zero or below");
+            // Debug.Log("Life has reached zero or below");
             if (playerController != null)
             {
                 playerController.Die();
@@ -214,12 +214,12 @@ public class HealthSystem : MonoBehaviour
         // Jika tidak ada shard yang dikumpulkan di level ini → tidak usah discard
         if (GameManager.Instance.data.tempShards == null || GameManager.Instance.data.tempShards.Count == 0)
         {
-            Debug.Log("[HealthSystem] Tidak ada shard yang dikumpulkan. Tidak ada yang perlu di-discard.");
+            // Debug.Log("[HealthSystem] Tidak ada shard yang dikumpulkan. Tidak ada yang perlu di-discard.");
             return;
         }
 
         // Jika ada shard → hapus semuanya (karena player kalah)
-        Debug.Log("[HealthSystem] Player kalah. Menghapus tempShards yang terkumpul di level ini.");
+        // Debug.Log("[HealthSystem] Player kalah. Menghapus tempShards yang terkumpul di level ini.");
 
         GameManager.Instance.data.tempShards.Clear();
         GameManager.Instance.SaveGame();
