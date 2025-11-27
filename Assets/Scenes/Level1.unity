@@ -2306,6 +2306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89bff4702bfa0e47bc743b517fc0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NextLevel
+  meteorSpawner: {fileID: 0}
   playerTag: Player
   doorAnimator: {fileID: 1187006907}
   winTrigger: Win

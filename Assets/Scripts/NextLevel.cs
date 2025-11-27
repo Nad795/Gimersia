@@ -2,9 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour
 {
+    [SerializeField] public MeteorSpawner meteorSpawner;
+
     [Header("Player Trigger")]
     [SerializeField] private string playerTag = "Player";
 
@@ -126,6 +129,14 @@ public class NextLevel : MonoBehaviour
 
         if (winSfxSource != null && winSfx != null)
             winSfxSource.PlayOneShot(winSfx);
+
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if ((sceneName == "Level7" || sceneName == "Level8" || sceneName == "Level9") 
+            && meteorSpawner != null)
+        {
+            meteorSpawner.StopSpawning();
+        }
 
         yield return null;
 
