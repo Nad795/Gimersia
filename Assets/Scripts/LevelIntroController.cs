@@ -2,23 +2,24 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class LevelIntroController : MonoBehaviour
 {
     [Header("Player (opsional)")]
-    [SerializeField] private PlayerInput playerInput; // boleh dikosongkan, nanti dicari otomatis
+    [SerializeField] private PlayerInput playerInput;
 
     [Header("Level Title Panel")]
-    [SerializeField] private CanvasGroup levelTitleGroup;   // panel "LEVEL 1-1 THE SILENT DESCENT"
+    [SerializeField] private CanvasGroup levelTitleGroup;
     [SerializeField] private float titleHoldDuration = 1.5f;
 
     [Header("New Challenge Panel (opsional)")]
     [SerializeField] private bool showChallengeThisLevel = false;
-    [SerializeField] private CanvasGroup challengeGroup;   // panel challenge baru
-    [SerializeField] private Button challengeCloseButton;  // tombol Close di panel challenge
+    [SerializeField] private CanvasGroup challengeGroup;
+    [SerializeField] private Button challengeCloseButton;
 
     [Header("Meteor Control (opsional)")]
-    [SerializeField] private MeteorSpawner[] meteorSpawners; // kalau kosong, akan dicari otomatis
+    [SerializeField] private MeteorSpawner[] meteorSpawners;
 
     private bool challengeClosed = false;
 
@@ -30,18 +31,16 @@ public class LevelIntroController : MonoBehaviour
         if (meteorSpawners == null || meteorSpawners.Length == 0)
             meteorSpawners = FindObjectsOfType<MeteorSpawner>();
 
-        // Panel level title: awalnya nonaktif
         if (levelTitleGroup != null)
         {
             levelTitleGroup.gameObject.SetActive(false);
-            levelTitleGroup.alpha = 1f; // tidak pakai fade, langsung full
+            levelTitleGroup.alpha = 1f;
         }
 
-        // Panel challenge: awalnya nonaktif
         if (challengeGroup != null)
         {
             challengeGroup.gameObject.SetActive(false);
-            challengeGroup.alpha = 1f;  // langsung full
+            challengeGroup.alpha = 1f;
         }
     }
 
@@ -52,32 +51,26 @@ public class LevelIntroController : MonoBehaviour
 
     private IEnumerator RunIntroSequence()
     {
-        // Matikan input player sementara (opsional)
+        // matikan input & meteor
         if (playerInput != null)
             playerInput.enabled = false;
 
-        // Pause jatuhnya meteor
         if (meteorSpawners != null)
         {
             foreach (var spawner in meteorSpawners)
-            {
-                if (spawner != null)
-                    spawner.PauseSpawning();
-            }
+                if (spawner != null) spawner.PauseSpawning();
         }
 
-        // === 1. LEVEL TITLE === (tanpa fade: langsung muncul, tunggu, lalu hilang)
+        // === LEVEL TITLE ===
         if (levelTitleGroup != null)
         {
             levelTitleGroup.gameObject.SetActive(true);
             levelTitleGroup.alpha = 1f;
-
             yield return new WaitForSecondsRealtime(titleHoldDuration);
-
             levelTitleGroup.gameObject.SetActive(false);
         }
 
-        // === 2. NEW CHALLENGE (HANYA LEVEL TERTENTU) ===
+        // === CHALLENGE PANEL ===
         if (showChallengeThisLevel && challengeGroup != null)
         {
             challengeClosed = false;
@@ -89,33 +82,39 @@ public class LevelIntroController : MonoBehaviour
             {
                 challengeCloseButton.onClick.AddListener(OnChallengeCloseClicked);
                 challengeCloseButton.interactable = true;
+
+                // --------------- 🔥 PERUBAHAN PENTING #1 -----------------
+                // Jika Level1, jangan sampai disabled
+                if (SceneManager.GetActiveScene().name == "Level1")
+                    challengeCloseButton.interactable = true;
+                // ---------------------------------------------------------
             }
 
-            // Tunggu sampai tombol close ditekan
+            // Tunggu tombol ditekan
             yield return new WaitUntil(() => challengeClosed);
 
             if (challengeCloseButton != null)
             {
                 challengeCloseButton.onClick.RemoveListener(OnChallengeCloseClicked);
-                challengeCloseButton.interactable = false;
+
+                // --------------- 🔥 PERUBAHAN PENTING #2 -----------------
+                // Di Level1, JANGAN nonaktifkan tombol
+                if (SceneManager.GetActiveScene().name != "Level1")
+                    challengeCloseButton.interactable = false;
+                // ---------------------------------------------------------
             }
 
-            // Tanpa fade, langsung hilang
             challengeGroup.gameObject.SetActive(false);
         }
 
-        // Nyalakan lagi input player setelah semua intro selesai
+        // aktifkan input & meteor lagi
         if (playerInput != null)
             playerInput.enabled = true;
 
-        // Resume jatuhnya meteor
         if (meteorSpawners != null)
         {
             foreach (var spawner in meteorSpawners)
-            {
-                if (spawner != null)
-                    spawner.ResumeSpawning();
-            }
+                if (spawner != null) spawner.ResumeSpawning();
         }
     }
 
