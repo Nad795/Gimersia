@@ -2956,8 +2956,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 850, y: 440}
-  m_SizeDelta: {x: 140, y: 112}
+  m_AnchoredPosition: {x: 874.7, y: 464}
+  m_SizeDelta: {x: 119, y: 104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &963907422
 MonoBehaviour:
@@ -3047,7 +3047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c31150eb66be7da4ab12aec20cfdbb66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5597fb57e43d4344af12c98fbd68e00, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3979,6 +3979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89bff4702bfa0e47bc743b517fc0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NextLevel
+  meteorSpawner: {fileID: 0}
+  playerInput: {fileID: 0}
   playerTag: Player
   doorAnimator: {fileID: 1187006907}
   winTrigger: Win
@@ -3988,41 +3990,16 @@ MonoBehaviour:
   victoryPanel: {fileID: 7849697726533365256}
   nextLevelButton: {fileID: 6346632399598276600}
   restartButton: {fileID: 6346632399598276601}
-  slideDuration: 1
-  startOffsetX: -3000
   endX: 0
-  easeCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   virtueArtPanel: {fileID: 1460657849}
   virtueArtButton: {fileID: 1460657850}
   virtueFadeDuration: 0.5
   pauseAfterAnimAndSfx: 0.15
-  pauseAfterPanelSlide: 0.15
   unlockLevelValue: 7
   maxLevel: 9
   pauseButton: {fileID: 963907420}
+  tutorButton: {fileID: 0}
+  tutorPanel: {fileID: 0}
 --- !u!61 &1187006909
 BoxCollider2D:
   m_ObjectHideFlags: 0

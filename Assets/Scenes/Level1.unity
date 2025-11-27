@@ -2513,10 +2513,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1425874862}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1187006908}
+        m_TargetAssemblyTypeName: NextLevel, Assembly-CSharp
+        m_MethodName: ShowTutorPanel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2916,6 +2916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NextLevel
   meteorSpawner: {fileID: 0}
+  playerInput: {fileID: 0}
   playerTag: Player
   doorAnimator: {fileID: 1187006907}
   winTrigger: Win
@@ -2925,42 +2926,16 @@ MonoBehaviour:
   victoryPanel: {fileID: 7849697726533365256}
   nextLevelButton: {fileID: 6346632399598276600}
   restartButton: {fileID: 6346632399598276601}
-  slideDuration: 1
-  startOffsetX: -3000
   endX: 0
-  easeCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   virtueArtPanel: {fileID: 0}
   virtueArtButton: {fileID: 0}
   virtueFadeDuration: 0.5
   pauseAfterAnimAndSfx: 0.15
-  pauseAfterPanelSlide: 0.15
   unlockLevelValue: 2
   maxLevel: 9
   pauseButton: {fileID: 963907420}
   tutorButton: {fileID: 1032518706}
+  tutorPanel: {fileID: 1425874862}
 --- !u!61 &1187006909
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3293,10 +3268,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1425874862}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1187006908}
+        m_TargetAssemblyTypeName: NextLevel, Assembly-CSharp
+        m_MethodName: HideTutorPanel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

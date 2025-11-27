@@ -1,12 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour
 {
+    [Header("External Refs")]
     [SerializeField] public MeteorSpawner meteorSpawner;
+    [SerializeField] private PlayerInput playerInput;
 
     [Header("Player Trigger")]
     [SerializeField] private string playerTag = "Player";
@@ -22,10 +24,7 @@ public class NextLevel : MonoBehaviour
     [SerializeField] private RectTransform victoryPanel;
     [SerializeField] private GameObject nextLevelButton;
     [SerializeField] private GameObject restartButton;
-    [SerializeField] private float slideDuration = 0.6f;
-    [SerializeField] private float startOffsetX = -1000f;
-    [SerializeField] private float endX = 0f;
-    [SerializeField] private AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField] private float endX = 0f; // posisi X akhir panel
 
     [Header("Virtue Art")]
     [SerializeField] private RectTransform virtueArtPanel;
@@ -35,7 +34,6 @@ public class NextLevel : MonoBehaviour
 
     [Header("Beat Pauses (seconds, unscaled)")]
     [SerializeField] private float pauseAfterAnimAndSfx = 0.15f;
-    [SerializeField] private float pauseAfterPanelSlide = 0.15f;
 
     [Header("Level Progression")]
     [Tooltip("Nilai level tertinggi yang akan di-unlock ketika level ini selesai. Contoh: Level1 = 2, Level2 = 3, ..., Level9 = 9.")]
@@ -43,18 +41,28 @@ public class NextLevel : MonoBehaviour
     [Tooltip("Jumlah level maksimum yang ada di game (saat ini 9).")]
     [SerializeField] private int maxLevel = 9;
 
-    private bool triggered;
+    [Header("UI Buttons / Panels")]
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject tutorButton;
+    [SerializeField] private GameObject tutorPanel; // panel tutorial (Level 1)
+
+    private bool triggered;
     private bool levelSaved = false;
+
+    private void Awake()
+    {
+        // Cari PlayerInput kalau belum diset di Inspector
+        if (playerInput == null)
+            playerInput = FindObjectOfType<PlayerInput>();
+    }
 
     private void Start()
     {
         if (nextLevelButton != null)
             nextLevelButton.SetActive(false);
-        
-        if (restartButton != null)          
-            restartButton.SetActive(false); 
+
+        if (restartButton != null)
+            restartButton.SetActive(false);
 
         if (virtueArtPanel != null)
         {
@@ -75,12 +83,63 @@ public class NextLevel : MonoBehaviour
             virtueArtButton.SetActive(false);
             virtueArtButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(DismissVirtueArt);
         }
+
+        // Pastikan tutor panel awalnya bisa kamu atur dari Inspector (aktif/nonaktif),
+        // input player akan di-handle lewat fungsi Show/Hide di bawah.
     }
+
+    // =========================
+    //   TUTOR PANEL HANDLER
+    // =========================
+
+    /// <summary>
+    /// Panggil dari tombol / script lain ketika ingin menampilkan panel tutorial.
+    /// Misalnya hanya dipakai di Level1.
+    /// </summary>
+    public void ShowTutorPanel()
+    {
+        if (tutorPanel != null)
+        {
+            tutorPanel.SetActive(true);
+
+            // Contoh: hanya matikan input di Level1
+            string sceneName = SceneManager.GetActiveScene().name;
+            if (sceneName == "Level1" && playerInput != null && !triggered)
+            {
+                playerInput.enabled = false;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Panggil dari tombol "Close"/"Got it" di panel tutorial.
+    /// </summary>
+    public void HideTutorPanel()
+    {
+        if (tutorPanel != null)
+        {
+            tutorPanel.SetActive(false);
+
+            // Aktifkan input lagi kalau player belum menang
+            if (playerInput != null && !triggered)
+            {
+                playerInput.enabled = true;
+            }
+        }
+    }
+
+    // =========================
+    //   VIRTUE ART
+    // =========================
 
     public void DismissVirtueArt()
     {
         artDismissed = true;
     }
+
+    // =========================
+    //   TRIGGER MENANG
+    // =========================
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -97,8 +156,7 @@ public class NextLevel : MonoBehaviour
         if (levelBgmSource != null)
             StartCoroutine(FadeOutAudio(levelBgmSource, 1f));
 
-        // --- Disable all player input ---
-        PlayerInput playerInput = other.GetComponent<PlayerInput>();
+        // Matikan input player (pakai field, bukan variabel lokal baru)
         if (playerInput != null)
             playerInput.enabled = false;
 
@@ -112,7 +170,7 @@ public class NextLevel : MonoBehaviour
     {
         var gm = GameManager.Instance;
 
-        // ==== PERBAIKAN SAVE LEVEL DI SINI ====
+        // ==== SAVE LEVEL ====
         if (!levelSaved && gm != null && gm.data != null)
         {
             int clampedUnlock = Mathf.Clamp(unlockLevelValue, 1, maxLevel);
@@ -124,7 +182,6 @@ public class NextLevel : MonoBehaviour
         }
 
         if (pauseButton != null) pauseButton.SetActive(false);
-
         if (tutorButton != null) tutorButton.SetActive(false);
 
         if (doorAnimator != null && !string.IsNullOrEmpty(winTrigger))
@@ -135,7 +192,7 @@ public class NextLevel : MonoBehaviour
 
         string sceneName = SceneManager.GetActiveScene().name;
 
-        if ((sceneName == "Level7" || sceneName == "Level8" || sceneName == "Level9") 
+        if ((sceneName == "Level7" || sceneName == "Level8" || sceneName == "Level9")
             && meteorSpawner != null)
         {
             meteorSpawner.StopSpawning();
@@ -163,15 +220,18 @@ public class NextLevel : MonoBehaviour
             virtueArtButton.SetActive(false);
         }
 
-        // --- Victory panel (slide) ---
+        // --- Victory panel: langsung muncul tanpa slide ---
         if (victoryPanel != null)
         {
-            yield return StartCoroutine(SlidePanelIn(victoryPanel));
+            victoryPanel.gameObject.SetActive(true);
+
+            // Opsional: pastikan posisinya di endX
+            Vector2 pos = victoryPanel.anchoredPosition;
+            pos.x = endX;
+            victoryPanel.anchoredPosition = pos;
         }
 
-        yield return new WaitForSecondsRealtime(pauseAfterPanelSlide);
-
-        // Show the Scene Loader Button
+        // Tampilkan kedua tombol secara bersamaan
         if (nextLevelButton != null)
             nextLevelButton.SetActive(true);
 
@@ -184,6 +244,10 @@ public class NextLevel : MonoBehaviour
             CommitCollectiblesOnWin();
         }
     }
+
+    // =========================
+    //   COLLECTIBLE SHARDS
+    // =========================
 
     public void CommitCollectiblesOnWin()
     {
@@ -214,27 +278,9 @@ public class NextLevel : MonoBehaviour
         GameManager.Instance.SaveGame();
     }
 
-    private IEnumerator SlidePanelIn(RectTransform panel)
-    {
-        panel.gameObject.SetActive(true);
-        Vector2 pos = panel.anchoredPosition;
-        pos.x = startOffsetX;
-        panel.anchoredPosition = pos;
-
-        float t = 0f;
-        float dur = Mathf.Max(0.0001f, slideDuration);
-
-        while (t < 1f)
-        {
-            t += Time.unscaledDeltaTime / dur;
-            float k = easeCurve.Evaluate(Mathf.Clamp01(t));
-            pos.x = Mathf.Lerp(startOffsetX, endX, k);
-            panel.anchoredPosition = pos;
-            yield return null;
-        }
-
-        panel.anchoredPosition = new Vector2(endX, panel.anchoredPosition.y);
-    }
+    // =========================
+    //   UI HELPERS
+    // =========================
 
     private IEnumerator FadeInPanel(RectTransform panel, float duration)
     {
